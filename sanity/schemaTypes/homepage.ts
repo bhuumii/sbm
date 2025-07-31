@@ -7,30 +7,25 @@ export default defineType({
   title: 'Homepage',
   type: 'document',
   fields: [
-
+    // Hero Section
     defineField({
       name: 'heroTitle',
       title: 'Hero Title',
-      description: 'The main big text on the homepage.',
       type: 'string',
     }),
     defineField({
       name: 'heroSubtitle',
       title: 'Hero Subtitle',
-      description: 'The smaller text underneath the main title.',
       type: 'string',
     }),
     defineField({
       name: 'heroImage',
       title: 'Hero Image',
-      description: 'The main background image for the homepage.',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
+      options: { hotspot: true },
     }),
 
-  
+    //  About Us Summary 
     defineField({
         name: 'aboutTitle',
         title: 'About Section Title',
@@ -39,36 +34,47 @@ export default defineType({
     defineField({
         name: 'aboutDescription',
         title: 'About Section Description',
-        
         type: 'text',
     }),
 
+    // Services Section 
+    defineField({
+        name: 'services',
+        title: 'Homepage Services',
+        description: 'Select the services to display on the homepage.',
+        type: 'array',
+        of: [{ type: 'reference', to: [{type: 'service'}] }]
+    }),
 
-defineField({
-    name: 'services',
-    title: 'Services Section',
-    description: 'Select the services to display on the homepage.',
-    type: 'array',
-    of: [
-      {
-        type: 'reference',
-        to: [{type: 'service'}] 
-      }
-    ]
-}),
-
- defineField({
-      name: 'ctaTitle',
-      title: 'CTA Section Title',
-      description: "The compelling text, e.g., 'Ready to Elevate Your Brand?'",
+    // Products Teaser Section
+    defineField({
+      name: 'productsTitle',
+      title: 'Products Teaser Title',
+      description: "e.g., 'Our Core Product Range'",
       type: 'string',
     }),
     defineField({
-      name: 'ctaButtonText',
-      title: 'CTA Button Text',
-      description: "The text for the button, e.g., 'Get In Touch'",
-      type: 'string',
+      name: 'productCategories',
+      title: 'Product Categories List',
+      description: 'Add a few product names or categories to feature on the homepage.',
+      type: 'array',
+      of: [{ type: 'string' }] 
     }),
 
+    // Gallery Teaser Section 
+    defineField({
+      name: 'galleryTitle',
+      title: 'Gallery Teaser Title',
+      description: "e.g., 'Explore Our Work'",
+      type: 'string'
+    }),
+    defineField({
+      name: 'featuredGalleryImages',
+      title: 'Featured Gallery Images',
+      description: 'Select exactly 3 images from the gallery to feature on the homepage.',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'galleryImage' }] }],
+      validation: (Rule) => Rule.max(3).error('You can select a maximum of 3 images.'),
+    }),
   ],
 })

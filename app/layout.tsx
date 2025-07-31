@@ -1,11 +1,14 @@
-
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ConnectWithUs } from "@/components/ConnectWithUs"; 
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ 
+  subsets: ["latin"],
+  weight: ['400', '700'] 
+});
 
 export const metadata: Metadata = {
   title: "SBM Traders - Your Trusted Partner",
@@ -19,9 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-50`}>
+      <body className={`${poppins.className} bg-gray-50`}>
         <Navbar />
-        <main>{children}</main>
+        <main>
+          {children}
+        </main>
+        <ConnectWithUs /> 
         <Footer />
       </body>
     </html>

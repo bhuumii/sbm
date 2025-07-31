@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import { useState } from 'react';
@@ -74,7 +72,7 @@ export const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+        <label htmlFor="message" className="block text-sm font-medium text-gray-700">Enquiry Detail</label>
         <textarea
           id="message" name="message" rows={4} required
           value={formData.message} onChange={handleChange}

@@ -1,5 +1,3 @@
-
-
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
@@ -22,7 +20,7 @@ export async function POST(request: Request) {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone || 'Not provided'}</p> 
-        <p><strong>Message:</strong></p>
+        <p><strong>Enquiry Detail:</strong></p>
         <p>${message}</p>
       `,
     });

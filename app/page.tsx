@@ -1,10 +1,9 @@
-
-
 import { client } from "@/sanity/client";
 import { Hero } from "@/components/Hero";
 import { AboutSummary } from "@/components/AboutSummary";
 import { ServicesSection } from "@/components/ServicesSection";
-import { CTASection } from "@/components/CTASection"; 
+import { ProductsTeaser } from "@/components/ProductsTeaser";
+import { GalleryTeaser } from "@/components/GalleryTeaser";
 import imageUrlBuilder from '@sanity/image-url';
 
 const builder = imageUrlBuilder(client);
@@ -12,12 +11,9 @@ function urlFor(source: any) {
   return builder.image(source);
 }
 
-interface Service {
-  _id: string;
-  title?: string;
-  description?: string;
-}
-
+// Define interfaces for our data shapes for clarity
+interface Service { _id: string; title?: string; description?: string; }
+interface GalleryImage { _id: string; image: any; caption?: string; }
 interface HomepageData {
   heroTitle: string;
   heroSubtitle: string;
@@ -25,24 +21,25 @@ interface HomepageData {
   aboutTitle: string;
   aboutDescription: string;
   services: Service[];
-  ctaTitle?: string;      
-  ctaButtonText?: string; 
+  productsTitle?: string;
+  productCategories: string[];
+  galleryTitle?: string;
+  featuredGalleryImages: GalleryImage[];
 }
 
 async function getHomepageData() {
+  // Update the query to fetch all the new fields
   const query = `*[_type == "homepage"][0] {
     heroTitle,
     heroSubtitle,
     heroImage,
     aboutTitle,
     aboutDescription,
-    "services": services[]->{
-      _id,
-      title,
-      description
-    },
-    ctaTitle,
-    ctaButtonText
+    "services": services[]->{ _id, title, description },
+    productsTitle,
+    productCategories,
+    galleryTitle,
+    "featuredGalleryImages": featuredGalleryImages[]->{ _id, image, caption }
   }`;
 
   const data: HomepageData = await client.fetch(query, {}, { cache: 'no-store' });
@@ -51,11 +48,8 @@ async function getHomepageData() {
 
 export default async function Home() {
   const data = await getHomepageData();
-  console.log("Data received on homepage:", data);
 
-  if (!data) {
-    return <div>Loading content or no content found...</div>;
-  }
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div>
@@ -72,10 +66,17 @@ export default async function Home() {
 
       <ServicesSection services={data.services} />
       
-      
-      <CTASection 
-        title={data.ctaTitle}
-        buttonText={data.ctaButtonText}
+      <ProductsTeaser 
+        title={data.productsTitle}
+        categories={data.productCategories}
+      />
+
+      <GalleryTeaser 
+        title={data.galleryTitle}
+        images={data.featuredGalleryImages?.map(img => ({
+          ...img,
+          imageUrl: urlFor(img.image).width(600).height(600).url()
+        })) || []}
       />
     </div>
   );

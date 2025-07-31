@@ -1,5 +1,3 @@
-// app/contact/page.tsx
-
 import { client } from "@/sanity/client";
 import { ContactForm } from "@/components/ContactForm";
 import { Mail, Phone, MapPin } from 'lucide-react';
@@ -21,7 +19,7 @@ export default async function ContactPage() {
 
   return (
     <div className="bg-gray-50">
-      <div className="container mx-auto px-6 py-12 md:py-16">
+     <div className="container mx-auto px-6 py-12 md:py-16">
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Contact Us</h1>
           <p className="text-gray-600 mt-2">We're here to help. Reach out to us anytime.</p>
@@ -29,10 +27,10 @@ export default async function ContactPage() {
 
         <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Left Side: Contact Details & Map */}
-          <div className="space-y-8"> {/* Increased spacing */}
+          <div className="space-y-8"> 
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
-              <div className="space-y-4"> {/* Inner spacing for details */}
+              <div className="space-y-4"> 
                 {info.email && (
                   <a href={`mailto:${info.email}`} className="flex items-center space-x-3 text-gray-600 hover:text-blue-600">
                     <Mail className="w-5 h-5" />
