@@ -3,33 +3,33 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ConnectWithUs } from "@/components/ConnectWithUs"; 
+import { ConnectWithUs } from "@/components/ConnectWithUs";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-const poppins = Poppins({ 
-  subsets: ["latin"],
-  weight: ['400', '700'] 
+const poppins = Poppins({
+	subsets: ["latin"],
+	weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "SBM Traders - Your Trusted Partner",
-  description: "High-quality goods and branding solutions from SBM Traders.",
+	title: "SBM Traders - Your Trusted Partner",
+	description: "High-quality goods and branding solutions from SBM Traders.",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={`${poppins.className} bg-gray-50`}>
-        <Navbar />
-        <main>
-          {children}
-        </main>
-        <ConnectWithUs /> 
-        <Footer />
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className={`${poppins.className} bg-gray-50`}>
+				<Navbar />
+				<Breadcrumbs />
+				<main>{children}</main>
+				<ConnectWithUs />
+				<Footer />
+			</body>
+		</html>
+	);
 }

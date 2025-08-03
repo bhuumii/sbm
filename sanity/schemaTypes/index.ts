@@ -1,11 +1,18 @@
-
-
-import { type SchemaTypeDefinition } from 'sanity'
-import homepage from './homepage'
-import service from './service'
-import galleryImage from './galleryImage' 
-import contactInfo from './contactInfo' 
+import { type SchemaTypeDefinition } from "sanity";
+import homepage from "./homepage";
+import service from "./service";
+import galleryImage from "./galleryImage";
+import contactInfo from "./contactInfo";
+import product from "./product";
+import productCategory from "./productCategory";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [homepage, service, galleryImage, contactInfo], 
-}
+	types: [
+		homepage,
+		service,
+		galleryImage,
+		contactInfo,
+		product,
+		productCategory,
+	],
+};
