@@ -28,7 +28,7 @@ export const ProductDropdown = ({ categories }: ProductDropdownProps) => {
 		<div className="relative group">
 			<Link
 				href="/products"
-				className={`flex items-center gap-1 hover:text-blue-600 transition-colors duration-200 ${isActive ? "text-blue-600 font-bold" : "text-gray-600"}`}
+				className={`flex items-center gap-1 hover:text-blue-800 transition-colors duration-200 ${isActive ? "text-blue-600 font-bold" : "text-gray-600"}`}
 			>
 				Products
 				<ChevronDown size={16} />

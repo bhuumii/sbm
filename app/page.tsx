@@ -1,60 +1,35 @@
-import { client } from "@/sanity/client";
+import { client, urlFor } from "@/sanity/client";
 import { Hero } from "@/components/Hero";
 import { AboutSummary } from "@/components/AboutSummary";
 import { ServicesSection } from "@/components/ServicesSection";
 import { ProductsTeaser } from "@/components/ProductsTeaser";
 import { GalleryTeaser } from "@/components/GalleryTeaser";
-import imageUrlBuilder from "@sanity/image-url";
-
-const builder = imageUrlBuilder(client);
-function urlFor(source: any) {
-	return builder.image(source);
-}
-
-interface Service {
-	_id: string;
-	title?: string;
-	description?: string;
-}
-interface GalleryImage {
-	_id: string;
-	image: any;
-	caption?: string;
-}
-
-interface CategoryLink {
-	_id: string;
-	name?: string;
-	slug?: { current: string };
-}
+import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
 
 interface HomepageData {
-	heroTitle: string;
-	heroSubtitle: string;
-	heroImage: any;
+	heroSlides: any[];
 	aboutTitle: string;
 	aboutDescription: string;
-	services: Service[];
+	aboutImage: any;
+	services: any[];
 	productsTitle?: string;
-	productCategories: CategoryLink[];
+	productCategories: any[];
 	galleryTitle?: string;
-	featuredGalleryImages: GalleryImage[];
+	featuredGalleryImages: any[];
 }
 
 async function getHomepageData() {
 	const query = `*[_type == "homepage"][0] {
-    heroTitle,
-    heroSubtitle,
-    heroImage,
+    "heroSlides": heroSlides[]->{_id, title, subtitle, image},
     aboutTitle,
     aboutDescription,
+    aboutImage,
     "services": services[]->{ _id, title, description },
     productsTitle,
-    "productCategories": productCategories[]->{ _id, name, slug }, // Fetch the linked categories
+    "productCategories": productCategories[]->{ _id, name, slug },
     galleryTitle,
     "featuredGalleryImages": featuredGalleryImages[]->{ _id, image, caption }
   }`;
-
 	const data: HomepageData = await client.fetch(
 		query,
 		{},
@@ -69,31 +44,38 @@ export default async function Home() {
 
 	return (
 		<div>
-			<Hero
-				title={data.heroTitle}
-				subtitle={data.heroSubtitle}
-				imageUrl={urlFor(data.heroImage).width(1800).url()}
-			/>
-			<AboutSummary
-				title={data.aboutTitle}
-				description={data.aboutDescription}
-			/>
-			<ServicesSection services={data.services} />
-			<ProductsTeaser
-				title={data.productsTitle}
-				categories={data.productCategories}
-			/>
-			<GalleryTeaser
-				title={data.galleryTitle}
-				images={
-					data.featuredGalleryImages?.map((img) => ({
-						...img,
-						imageUrl: urlFor(img.image).width(600).height(600).url(),
-					})) || []
-				}
-			/>
+			<Hero slides={data.heroSlides} />
+
+			<ScrollAnimationWrapper>
+				<AboutSummary
+					title={data.aboutTitle}
+					description={data.aboutDescription}
+					image={data.aboutImage}
+				/>
+			</ScrollAnimationWrapper>
+
+			<ScrollAnimationWrapper>
+				<ServicesSection services={data.services} />
+			</ScrollAnimationWrapper>
+
+			<ScrollAnimationWrapper>
+				<ProductsTeaser
+					title={data.productsTitle}
+					categories={data.productCategories}
+				/>
+			</ScrollAnimationWrapper>
+
+			<ScrollAnimationWrapper>
+				<GalleryTeaser
+					title={data.galleryTitle}
+					images={
+						data.featuredGalleryImages?.map((img) => ({
+							...img,
+							imageUrl: urlFor(img.image).width(600).height(600).url(),
+						})) || []
+					}
+				/>
+			</ScrollAnimationWrapper>
 		</div>
 	);
 }
-
-export const revalidate = 0;

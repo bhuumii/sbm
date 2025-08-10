@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ConnectWithUs } from "@/components/ConnectWithUs";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-const poppins = Poppins({
+const inter = Inter({
 	subsets: ["latin"],
-	weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
-	title: "SBM Traders - Your Trusted Partner",
+	title: "SBM Traders",
 	description: "High-quality goods and branding solutions from SBM Traders.",
+	icons: {
+		icon: "/favicon.ico",
+		apple: "/apple-touch-icon.png",
+	},
 };
 
 export default function RootLayout({
@@ -23,7 +26,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${poppins.className} bg-gray-50`}>
+			<body className={`${inter.className} bg-gray-50`}>
 				<Navbar />
 				<Breadcrumbs />
 				<main>{children}</main>

@@ -21,7 +21,7 @@ export const Breadcrumbs = () => {
 				>
 					<Link
 						href="/"
-						className="hover:text-blue-600 flex items-center gap-2"
+						className="hover:text-blue-800 flex items-center gap-2"
 					>
 						<Home size={16} />
 						Home
@@ -60,7 +60,7 @@ export const Breadcrumbs = () => {
 								<span className="mx-2">/</span>
 								<Link
 									href={isLast ? pathname : correctedHref}
-									className={`${isLast ? "text-gray-700 font-semibold cursor-default" : "hover:text-blue-600"}`}
+									className={`${isLast ? "text-gray-700 font-semibold cursor-default" : "hover:text-blue-800"}`}
 									aria-current={isLast ? "page" : undefined}
 								>
 									{title}

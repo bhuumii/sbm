@@ -1,22 +1,20 @@
-// components/ConnectWithUs.tsx
-
 import { client } from "@/sanity/client";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 interface ContactInfo {
-	email?: string;
-	phone?: string;
+	email?: string[];
+	phone?: string[];
 	address?: string;
 }
 
-async function getContactInfo() {
+async function getContactInfo(): Promise<ContactInfo> {
 	const query = `*[_type == "contactInfo"][0]`;
 	const data = await client.fetch(query, {}, { cache: "no-store" });
 	return data;
 }
 
 export const ConnectWithUs = async () => {
-	const info: ContactInfo = await getContactInfo();
+	const info = await getContactInfo();
 
 	if (!info) {
 		return null;
@@ -44,24 +42,34 @@ export const ConnectWithUs = async () => {
 					<div className="bg-white p-8 rounded-lg shadow-md text-center flex flex-col items-center">
 						<Phone className="w-10 h-10 text-blue-800 mb-4" />
 						<h3 className="text-lg font-bold text-blue-800 mb-2">PHONE</h3>
-						<a
-							href={`tel:${info.phone}`}
-							className="text-gray-600 hover:text-blue-700"
-						>
-							{info.phone || "Phone not available"}
-						</a>
+						<div className="flex flex-col space-y-2">
+							{info.phone?.map((phoneNumber) => (
+								<a
+									key={phoneNumber}
+									href={`tel:${phoneNumber}`}
+									className="text-gray-600 hover:text-blue-700"
+								>
+									{phoneNumber}
+								</a>
+							))}
+						</div>
 					</div>
 
 					{/* Card 3: Email Contact */}
 					<div className="bg-white p-8 rounded-lg shadow-md text-center flex flex-col items-center">
 						<Mail className="w-10 h-10 text-blue-800 mb-4" />
 						<h3 className="text-lg font-bold text-blue-800 mb-2">EMAIL</h3>
-						<a
-							href={`mailto:${info.email}`}
-							className="text-gray-600 hover:text-blue-700"
-						>
-							{info.email || "Email not available"}
-						</a>
+						<div className="flex flex-col space-y-2">
+							{info.email?.map((emailAddress) => (
+								<a
+									key={emailAddress}
+									href={`mailto:${emailAddress}`}
+									className="text-gray-600 hover:text-blue-700"
+								>
+									{emailAddress}
+								</a>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>

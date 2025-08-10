@@ -3,6 +3,7 @@ import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
 
 const builder = imageUrlBuilder(client);
 
@@ -38,38 +39,39 @@ export default function GalleryPage() {
 
 	return (
 		<div className="bg-white">
-			<div className="container mx-auto px-6 py-12 md:py-16">
-				<div className="text-center mb-12">
-					<h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-						Our Gallery
-					</h1>
-					<p className="text-gray-600 mt-2">
-						A showcase of our premium materials and solutions in action.
-					</p>
-				</div>
+			<div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+				<ScrollAnimationWrapper>
+					<div className="text-center mb-12">
+						<h1 className="text-3xl md:text-4xl font-bold text-gray-800">
+							Our Gallery
+						</h1>
+						<p className="text-gray-600 mt-2">
+							A showcase of our premium materials and solutions in action.
+						</p>
+					</div>
+				</ScrollAnimationWrapper>
 
 				{images && images.length > 0 ? (
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-						{images.map((item) => (
-							<div
-								key={item._id}
-								className="group relative block w-full overflow-hidden rounded-2xl shadow-md border border-gray-100"
-							>
-								<Image
-									src={builder.image(item.image).width(500).height(400).url()}
-									alt={item.caption || "SBM Traders Gallery Image"}
-									width={500}
-									height={400}
-									className="w-full h-auto object-cover transform group-hover:scale-105 group-hover:brightness-75 transition-all duration-300"
-								/>
-								{item.caption && (
-									<div className="absolute inset-0 flex items-end p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-										<p className="text-white text-sm font-semibold">
-											{item.caption}
-										</p>
-									</div>
-								)}
-							</div>
+						{images.map((item, index) => (
+							<ScrollAnimationWrapper key={item._id} delay={index * 100}>
+								<div className="group relative block w-full overflow-hidden rounded-2xl shadow-md border border-gray-100">
+									<Image
+										src={builder.image(item.image).width(500).height(400).url()}
+										alt={item.caption || "SBM Traders Gallery Image"}
+										width={500}
+										height={400}
+										className="w-full h-auto object-cover transform group-hover:scale-105 group-hover:brightness-75 transition-all duration-300"
+									/>
+									{item.caption && (
+										<div className="absolute inset-0 flex items-end p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+											<p className="text-white text-sm font-semibold">
+												{item.caption}
+											</p>
+										</div>
+									)}
+								</div>
+							</ScrollAnimationWrapper>
 						))}
 					</div>
 				) : (
