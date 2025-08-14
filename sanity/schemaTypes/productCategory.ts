@@ -11,33 +11,33 @@ export default defineType({
 			type: "string",
 			validation: (Rule) => Rule.required(),
 		}),
-
 		defineField({
 			name: "slug",
 			title: "Slug",
 			type: "slug",
-			options: {
-				source: "name",
-				maxLength: 96,
-			},
+			options: { source: "name" },
 			validation: (Rule) => Rule.required(),
 		}),
-
 		defineField({
 			name: "description",
-			title: "Short Description",
+			title: "Hero Description",
 			type: "string",
-			description: "A brief, one-sentence tagline for this category.",
 		}),
-
 		defineField({
 			name: "image",
 			title: "Hero Image",
 			type: "image",
-			options: {
-				hotspot: true,
-			},
+			options: { hotspot: true },
 		}),
+
+		defineField({
+			name: "tagline",
+			title: "Card Tagline",
+			description:
+				"The small text that appears above the category name in the homepage carousel (e.g., 'High-Quality')",
+			type: "string",
+		}),
+
 		defineField({
 			name: "products",
 			title: "Products in this Category",

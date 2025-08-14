@@ -2,9 +2,17 @@ import { client, urlFor } from "@/sanity/client";
 import { Hero } from "@/components/Hero";
 import { AboutSummary } from "@/components/AboutSummary";
 import { ServicesSection } from "@/components/ServicesSection";
-import { ProductsTeaser } from "@/components/ProductsTeaser";
+import { ProductCarousel } from "@/components/ProductCarousel";
 import { GalleryTeaser } from "@/components/GalleryTeaser";
 import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
+
+interface CategoryLink {
+	_id: string;
+	name?: string;
+	slug?: { current: string };
+	tagline?: string;
+	image?: any;
+}
 
 interface HomepageData {
 	heroSlides: any[];
@@ -13,7 +21,7 @@ interface HomepageData {
 	aboutImage: any;
 	services: any[];
 	productsTitle?: string;
-	productCategories: any[];
+	productCategories: CategoryLink[];
 	galleryTitle?: string;
 	featuredGalleryImages: any[];
 }
@@ -26,7 +34,8 @@ async function getHomepageData() {
     aboutImage,
     "services": services[]->{ _id, title, description },
     productsTitle,
-    "productCategories": productCategories[]->{ _id, name, slug },
+ 
+    "productCategories": productCategories[]->{ _id, name, slug, tagline, image }, 
     galleryTitle,
     "featuredGalleryImages": featuredGalleryImages[]->{ _id, image, caption }
   }`;
@@ -59,7 +68,7 @@ export default async function Home() {
 			</ScrollAnimationWrapper>
 
 			<ScrollAnimationWrapper>
-				<ProductsTeaser
+				<ProductCarousel
 					title={data.productsTitle}
 					categories={data.productCategories}
 				/>

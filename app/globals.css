@@ -20,9 +20,16 @@
 }
 
 body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: var(--font-lato);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-montserrat);
 }
 
 @keyframes fadeInUp {
@@ -42,4 +49,41 @@ body {
 	animation-name: fadeInUp;
 	animation-duration: 0.6s;
 	animation-timing-function: ease-out;
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.animate-scaleIn {
+	animation: scaleIn 0.2s ease-out forwards;
+}
+
+.animate-fadeIn {
+	animation: fadeIn 0.2s ease-out forwards;
 }
