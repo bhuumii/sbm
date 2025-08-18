@@ -6,7 +6,7 @@ import contactInfo from "./contactInfo";
 import product from "./product";
 import productCategory from "./productCategory";
 import careerPage from "./careerPage";
-import heroSlide from "./heroSlide";
+
 import footer from "./footer";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -18,7 +18,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		product,
 		productCategory,
 		careerPage,
-		heroSlide,
+		
 		footer,
 	],
 };

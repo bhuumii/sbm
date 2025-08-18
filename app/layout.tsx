@@ -34,7 +34,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${lato.variable} ${montserrat.variable} font-sans bg-gray-50`}
+			
+    className={`${lato.variable} ${montserrat.variable} font-sans bg-white`}
+
+
 			>
 				<div className="flex flex-col min-h-screen">
 					<Navbar />

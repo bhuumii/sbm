@@ -5,13 +5,7 @@ export default defineType({
 	title: "Homepage",
 	type: "document",
 	fields: [
-		defineField({
-			name: "heroSlides",
-			title: "Hero Slides",
-			description: "Add one or more slides for the homepage carousel.",
-			type: "array",
-			of: [{ type: "reference", to: [{ type: "heroSlide" }] }],
-		}),
+		
 
 		defineField({
 			name: "aboutTitle",

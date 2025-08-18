@@ -39,7 +39,7 @@ export const ProductCarousel = ({
 	if (!categories || categories.length === 0) return null;
 
 	return (
-		<section className="bg-gray-50 py-16 md:py-24">
+		<section className="bg-white-50 py-16 md:py-24">
 			<div className="container mx-auto">
 				<div className="text-center px-4 sm:px-6 mb-8">
 					<h2 className="text-3xl md:text-4xl font-bold text-gray-800">

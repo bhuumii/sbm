@@ -1,5 +1,5 @@
 import { client, urlFor } from "@/sanity/client";
-import { Hero } from "@/components/Hero";
+import { AnimatedSBMLogo } from "@/components/AnimatedSBMLogo";
 import { AboutSummary } from "@/components/AboutSummary";
 import { ServicesSection } from "@/components/ServicesSection";
 import { ProductCarousel } from "@/components/ProductCarousel";
@@ -15,7 +15,7 @@ interface CategoryLink {
 }
 
 interface HomepageData {
-	heroSlides: any[];
+
 	aboutTitle: string;
 	aboutDescription: string;
 	aboutImage: any;
@@ -28,7 +28,7 @@ interface HomepageData {
 
 async function getHomepageData() {
 	const query = `*[_type == "homepage"][0] {
-    "heroSlides": heroSlides[]->{_id, title, subtitle, image},
+    // Removed heroSlides from query
     aboutTitle,
     aboutDescription,
     aboutImage,
@@ -53,7 +53,8 @@ export default async function Home() {
 
 	return (
 		<div>
-			<Hero slides={data.heroSlides} />
+			
+			<AnimatedSBMLogo />
 
 			<ScrollAnimationWrapper>
 				<AboutSummary

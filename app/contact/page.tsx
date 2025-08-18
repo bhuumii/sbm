@@ -1,100 +1,91 @@
-"use client";
+import { client, urlFor } from "@/sanity/client";
+import { AnimatedSBMLogo } from "@/components/AnimatedSBMLogo";
+import { AboutSummary } from "@/components/AboutSummary";
+import { ServicesSection } from "@/components/ServicesSection";
+import { ProductCarousel } from "@/components/ProductCarousel";
+import { GalleryTeaser } from "@/components/GalleryTeaser";
+import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
 
-import { client } from "@/sanity/client";
-import { ContactForm } from "@/components/ContactForm";
-import { Mail, Phone, MapPin } from "lucide-react";
-import { useEffect, useState } from "react";
-
-interface ContactInfo {
-	email?: string[];
-	phone?: string[];
-	address?: string;
+interface CategoryLink {
+	_id: string;
+	name?: string;
+	slug?: { current: string };
+	tagline?: string;
+	image?: any;
 }
 
-export default function ContactPage() {
-	const [info, setInfo] = useState<ContactInfo | null>(null);
+interface HomepageData {
+	heroSlides: any[];
+	aboutTitle: string;
+	aboutDescription: string;
+	aboutImage: any;
+	services: any[];
+	productsTitle?: string;
+	productCategories: CategoryLink[];
+	galleryTitle?: string;
+	featuredGalleryImages: any[];
+}
 
-	useEffect(() => {
-		const getContactInfo = async () => {
-			const query = `*[_type == "contactInfo"][0]`;
-			const data = await client.fetch(query);
-			setInfo(data);
-		};
-		getContactInfo();
-	}, []);
+async function getHomepageData() {
+	const query = `*[_type == "homepage"][0] {
+    "heroSlides": heroSlides[]->{_id, title, subtitle, image},
+    aboutTitle,
+    aboutDescription,
+    aboutImage,
+    "services": services[]->{ _id, title, description },
+    productsTitle,
+ 
+    "productCategories": productCategories[]->{ _id, name, slug, tagline, image }, 
+    galleryTitle,
+    "featuredGalleryImages": featuredGalleryImages[]->{ _id, image, caption }
+  }`;
+	const data: HomepageData = await client.fetch(
+		query,
+		{},
+		{ cache: "no-store" },
+	);
+	return data;
+}
+
+export default async function Home() {
+	const data = await getHomepageData();
+	if (!data) return <div>Loading...</div>;
 
 	return (
-		<div className="bg-gray-50">
-			<div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
-				<div className="text-center mb-12">
-					<h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-						Contact Us
-					</h1>
-					<p className="text-gray-600 mt-2">
-						We're here to help. Reach out to us anytime.
-					</p>
-				</div>
+		<div>
+			{/* Replaced Hero component with AnimatedSBMLogo */}
+			<AnimatedSBMLogo />
 
-				<div className="bg-white p-8 md:p-12 rounded-lg shadow-lg max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-					{/* Left Side: Contact Details & Map */}
-					<div className="space-y-8">
-						<div>
-							<h2 className="text-2xl font-bold text-gray-900 mb-6">
-								Get in Touch
-							</h2>
-							<div className="space-y-4">
-								{info?.email?.map((emailAddress) => (
-									<a
-										key={emailAddress}
-										href={`mailto:${emailAddress}`}
-										className="flex items-center space-x-3 text-gray-600 hover:text-blue-600"
-									>
-										<Mail className="w-5 h-5" />
-										<span className="break-all">{emailAddress}</span>
-									</a>
-								))}
-								{info?.phone?.map((phoneNumber) => (
-									<a
-										key={phoneNumber}
-										href={`tel:${phoneNumber}`}
-										className="flex items-center space-x-3 text-gray-600 hover:text-blue-600"
-									>
-										<Phone className="w-5 h-5" />
-										<span className="break-all">{phoneNumber}</span>
-									</a>
-								))}
-								{info?.address && (
-									<div className="flex items-start space-x-3 text-gray-600">
-										<MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
-										<p className="whitespace-pre-wrap break-words">
-											{info.address}
-										</p>
-									</div>
-								)}
-							</div>
-						</div>
-						<div className="w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-inner">
-							<iframe
-								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.0418065346244!2d76.7329371761931!3d30.717225086380815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fedd51203ca95%3A0x4c09d88d4520b76a!2sS.B.M%20Traders!5e0!3m2!1sen!2sin!4v1753821139100!5m2!1sen!2sin"
-								width="100%"
-								height="100%"
-								style={{ border: 0 }}
-								allowFullScreen={true}
-								loading="lazy"
-								referrerPolicy="no-referrer-when-downgrade"
-							></iframe>
-						</div>
-					</div>
+			<ScrollAnimationWrapper>
+				<AboutSummary
+					title={data.aboutTitle}
+					description={data.aboutDescription}
+					image={data.aboutImage}
+				/>
+			</ScrollAnimationWrapper>
 
-					{/* Right Side: Contact Form */}
-					<div>
-						<h2 className="text-2xl font-bold text-gray-900 mb-6">
-							Send Us a Message
-						</h2>
-						<ContactForm />
-					</div>
-				</div>
-			</div>
+			<ScrollAnimationWrapper>
+				<ServicesSection services={data.services} />
+			</ScrollAnimationWrapper>
+
+			<ScrollAnimationWrapper>
+				<ProductCarousel
+					title={data.productsTitle}
+					categories={data.productCategories}
+				/>
+			</ScrollAnimationWrapper>
+
+			<ScrollAnimationWrapper>
+				<GalleryTeaser
+					title={data.galleryTitle}
+					images={
+						data.featuredGalleryImages?.map((img) => ({
+							...img,
+							imageUrl: urlFor(img.image).width(600).height(600).url(),
+						})) || []
+					}
+				/>
+			</ScrollAnimationWrapper>
 		</div>
 	);
 }
