@@ -6,30 +6,30 @@ import { Footer } from "@/components/Footer";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const montserrat = Montserrat({
-	subsets: ["latin"],
-	weight: ["700"],
-	variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-montserrat",
 });
 
 const lato = Lato({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	variable: "--font-lato",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lato",
 });
 
 export const metadata: Metadata = {
-	title: "SBM Traders",
-	description: "High-quality goods and branding solutions from SBM Traders.",
-	icons: {
-		icon: "/favicon.ico",
-		apple: "/apple-touch-icon.png",
-	},
+  title: "SBM Traders",
+  description: "High-quality goods and branding solutions from SBM Traders.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
 	return (
 		<html lang="en">

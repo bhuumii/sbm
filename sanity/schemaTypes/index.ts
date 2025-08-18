@@ -1,4 +1,4 @@
-import { type SchemaTypeDefinition } from "sanity";
+import type { SchemaTypeDefinition } from "sanity";
 import homepage from "./homepage";
 import service from "./service";
 import galleryImage from "./galleryImage";

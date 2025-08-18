@@ -3,10 +3,10 @@ import imageUrlBuilder from "@sanity/image-url";
 
 import { apiVersion, dataset, projectId } from "./env";
 export const client = createClient({
-	apiVersion,
-	dataset,
-	projectId,
-	useCdn: false,
+  apiVersion,
+  dataset,
+  projectId,
+  useCdn: false,
 });
 
 const builder = imageUrlBuilder(client);
