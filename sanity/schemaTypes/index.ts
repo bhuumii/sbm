@@ -6,8 +6,12 @@ import contactInfo from "./contactInfo";
 import product from "./product";
 import productCategory from "./productCategory";
 import careerPage from "./careerPage";
-
+import statItem from './statItem'
+import featureItem from './featureItem'
+import mapLocation from './mapLocation'
 import footer from "./footer";
+import teamMember from './teamMember'
+import aboutPage from './aboutPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -18,7 +22,12 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		product,
 		productCategory,
 		careerPage,
-		
+		mapLocation,
+	 featureItem, 
+	 	statItem,
 		footer,
+		teamMember,
+		aboutPage,
+		
 	],
 };

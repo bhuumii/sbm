@@ -1,5 +1,3 @@
-// sanity/lib/schemaTypes/homepage.ts
-
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
@@ -26,14 +24,19 @@ export default defineType({
       options: { hotspot: true }
     }),
 
-    // --- Services Section ---
-    defineField({
-      name: 'services',
-      title: 'Homepage Services',
-      description: 'Select the services to display on the homepage.',
-      type: 'array',
-      of: [{ type: 'reference', to: [{type: 'service'}] }]
-    }),
+        //  Map Section ---
+    defineField({ name: 'mapTitle', title: 'Map Section Title', type: 'string' }),
+    defineField({ name: 'locations', title: 'Map Locations', type: 'array', of: [{ type: 'reference', to: [{type: 'mapLocation'}] }] }),
+
+    // Why Choose Us Section ---
+    defineField({ name: 'whyChooseUsTitle', title: 'Why Choose Us Title', type: 'string' }),
+    defineField({ name: 'customerFeatures', title: 'Features for Customers', type: 'array', of: [{ type: 'reference', to: [{type: 'featureItem'}] }] }),
+    defineField({ name: 'manufacturerFeatures', title: 'Features for Manufacturers', type: 'array', of: [{ type: 'reference', to: [{type: 'featureItem'}] }] }),
+
+    
+     // Stats Section ---
+    defineField({ name: 'stats', title: 'Stats Section', type: 'array', of: [{ type: 'reference', to: [{type: 'statItem'}] }] }),
+
     
     // --- Product and Gallery teasers ---
     defineField({

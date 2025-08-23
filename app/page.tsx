@@ -1,77 +1,140 @@
-// app/page.tsx
 import { client, urlFor } from "@/sanity/client";
 import { AnimatedSBMLogo } from "@/components/AnimatedSBMLogo";
 import { AboutSummary } from "@/components/AboutSummary";
-import { ServicesSection } from "@/components/ServicesSection";
+import { MapSection } from "@/components/MapSection";
+import { StatsSection } from "@/components/StatsSection";
+import { WhyChooseUs } from "@/components/WhyChooseUs";
+
 import { ProductCarousel } from "@/components/ProductCarousel";
 import { GalleryTeaser } from "@/components/GalleryTeaser";
 import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
 
-// Define all the data shapes needed for the homepage
-interface Service { _id: string; title?: string; description?: string; }
-interface CategoryLink { _id: string; name?: string; slug?: { current: string }; tagline?: string; image?: any; }
-interface GalleryImage { _id: string; image: any; caption?: string; }
+
+interface CategoryLink {
+  _id: string;
+  name?: string;
+  slug?: { current: string };
+  tagline?: string;
+  image?: any;
+}
+
+interface GalleryImage {
+  _id: string;
+  image: any;
+  caption?: string;
+}
+
+interface Stat {
+  _id: string;
+  number?: string;
+  label?: string;
+}
+
+interface Feature {
+  _id: string;
+  iconName?: string;
+  title?: string;
+  description?: string;
+}
+
+interface Location {
+  _id: string;
+  cityName?: string;
+  topPercentage?: number;
+  leftPercentage?: number;
+}
+
+
 interface HomepageData {
   aboutTitle: string;
   aboutDescription: string;
   aboutImage: any;
-  services: Service[];
+    mapTitle?: string;
+  locations: Location[];
+    whyChooseUsTitle?: string;
+  customerFeatures: Feature[];
+  manufacturerFeatures: Feature[];
+  stats: Stat[];
   productsTitle?: string;
   productCategories: CategoryLink[];
   galleryTitle?: string;
   featuredGalleryImages: GalleryImage[];
 }
 
-async function getHomepageData() {
-  // The complete query to fetch all sections
+
+async function getHomepageData(): Promise<HomepageData> {
   const query = `*[_type == "homepage"][0] {
     aboutTitle,
     aboutDescription,
     aboutImage,
-    "services": services[]->{ _id, title, description },
+       mapTitle,
+    "locations": locations[]->{_id, cityName, topPercentage, leftPercentage},
     productsTitle,
-    "productCategories": productCategories[]->{ _id, name, slug, tagline, image },
+    
+    whyChooseUsTitle,
+    "customerFeatures": customerFeatures[]->{_id, iconName, title, description},
+    "manufacturerFeatures": manufacturerFeatures[]->{_id, iconName, title, description},
+ "stats": stats[]->{_id, number, label},
+    "productCategories": productCategories[]->{_id, name, slug, tagline, image},
     galleryTitle,
-    "featuredGalleryImages": featuredGalleryImages[]->{ _id, image, caption }
+    "featuredGalleryImages": featuredGalleryImages[]->{_id, image, caption}
   }`;
-  const data: HomepageData = await client.fetch(query, {}, { cache: "no-store" });
+  
+  const data = await client.fetch(query, {}, { cache: "no-store" });
   return data;
 }
 
 export default async function Home() {
   const data = await getHomepageData();
-  if (!data) return <div>Loading...</div>;
+  
+  if (!data) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div>
-      {/* 1. Animated Logo Hero (as you created it) */}
       <AnimatedSBMLogo />
 
-      {/* 2. "Welcome to SBM Traders" Section (Restored) */}
       <ScrollAnimationWrapper>
-        <AboutSummary
-          title={data.aboutTitle}
-          description={data.aboutDescription}
-          image={data.aboutImage}
+        <AboutSummary 
+          title={data.aboutTitle} 
+          description={data.aboutDescription} 
+          image={data.aboutImage} 
         />
       </ScrollAnimationWrapper>
 
-      {/* 3. "Our Services" Section (Restored) */}
-      <ScrollAnimationWrapper>
-        <ServicesSection services={data.services} />
-      </ScrollAnimationWrapper>
+ <ScrollAnimationWrapper>
+  <MapSection 
+        title={data.mapTitle} 
+        locations={data.locations} 
+      /></ScrollAnimationWrapper>
+       
 
-      {/* 4. Product Carousel Section */}
       <ScrollAnimationWrapper>
-        <ProductCarousel
-          title={data.productsTitle}
-          categories={data.productCategories}
+        <ProductCarousel 
+          title={data.productsTitle} 
+          categories={data.productCategories} 
         />
       </ScrollAnimationWrapper>
+    
+<ScrollAnimationWrapper>
+  <WhyChooseUs 
+        title={data.whyChooseUsTitle} 
+        customerFeatures={data.customerFeatures} 
+        manufacturerFeatures={data.manufacturerFeatures} 
+      />
+</ScrollAnimationWrapper>
+      
+<ScrollAnimationWrapper> <StatsSection stats={data.stats} /></ScrollAnimationWrapper>
+      
 
-      {/* 5. Gallery Teaser Section */}
+      
       <ScrollAnimationWrapper>
-        <GalleryTeaser
+        <GalleryTeaser 
           title={data.galleryTitle}
           images={
             data.featuredGalleryImages?.map((img) => ({

@@ -31,7 +31,7 @@ export const AnimatedSBMLogo = () => {
            
               <div className="relative transform transition-all duration-700 hover:scale-105">
                 <Image 
-                  src="/logo.png"
+                  src="/MAIN.png"
                   alt="SBM Logo"
                   width={120}
                   height={120}

@@ -1,5 +1,6 @@
-import { client } from "@/sanity/client";
+import { client, urlFor } from "@/sanity/client"; 
 import { Logo } from "./Logo";
+import Image from 'next/image'; 
 import Link from "next/link";
 import {
   Mail,
@@ -10,9 +11,12 @@ import {
   Linkedin,
 } from "lucide-react";
 
+
 interface FooterData {
+  footerLogo?: any;
   tagline?: string;
   socialLinks?: { platform: string; url: string }[];
+  whatsAppQR?: any;
 }
 interface ContactInfo {
   email?: string[];
@@ -20,14 +24,16 @@ interface ContactInfo {
   address?: string;
 }
 
+
 async function getFooterData() {
   const query = `{
     "footer": *[_type == "footer"][0],
     "contact": *[_type == "contactInfo"][0]
   }`;
-  const data = await client.fetch(query, {}, { cache: "no-store" });
+  const data = await client.fetch(query, {}, { cache: 'no-store' });
   return data;
 }
+
 
 const SocialIcon = ({ platform }: { platform: string }) => {
   if (platform.toLowerCase() === "facebook") return <Facebook size={20} />;
@@ -36,9 +42,11 @@ const SocialIcon = ({ platform }: { platform: string }) => {
   return null;
 };
 
+
 export const Footer = async () => {
   const { footer, contact }: { footer: FooterData; contact: ContactInfo } =
     await getFooterData();
+
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -49,30 +57,24 @@ export const Footer = async () => {
     { href: "/contact", label: "Contact Us" },
   ];
 
+
   return (
     <footer className="bg-gray-800 text-gray-300">
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 text-center md:text-left">
-          {/* Column 1: Logo, Tagline, Socials */}
-          <div className="space-y-6 flex flex-col items-center md:items-start">
-            <Logo />
-            <p className="text-sm leading-relaxed max-w-xs">
-              {footer?.tagline}
-            </p>
-            <div className="flex space-x-4">
-              {footer?.socialLinks?.map((link) => (
-                <a
-                  key={link.platform}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <SocialIcon platform={link.platform} />
-                </a>
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+         {/* Column 1: Logo & Tagline */}
+        <div className="space-y-6 md:col-span-1 flex flex-col items-center md:items-start">
+
+  <Image 
+    src="/ALT.png" 
+    alt="SBM Traders Footer Logo"
+    width={200}
+    height={100}
+    className="object-contain" 
+  />
+  <p className="text-sm leading-relaxed max-w-xs">{footer?.tagline}</p>
+</div>
+
 
           {/* Column 2: Quick Links */}
           <div className="md:mx-auto">
@@ -92,6 +94,7 @@ export const Footer = async () => {
               ))}
             </ul>
           </div>
+
 
           {/* Column 3: Contact Info */}
           <div>
@@ -132,6 +135,27 @@ export const Footer = async () => {
                 </li>
               )}
             </ul>
+          </div>
+          <div className="space-y-6">
+            <h3 className="text-lg font-semibold text-white">Connect</h3>
+            <div className="flex space-x-4">
+              {footer?.socialLinks?.map(link => (
+                <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                  <SocialIcon platform={link.platform} />
+                </a>
+              ))}
+            </div>
+            {footer?.whatsAppQR && (
+              <div className="bg-white p-2 rounded-md w-32 h-32">
+                <Image 
+                  src={urlFor(footer.whatsAppQR).url()}
+                  alt="WhatsApp QR Code"
+                  width={128}
+                  height={128}
+                  className="w-full h-full"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
