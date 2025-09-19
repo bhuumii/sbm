@@ -34,12 +34,6 @@ interface BlogPost {
 
 export const revalidate = 60;
 
-// ✅ Fix here: make searchParams optional
-interface PageProps {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   const query = `*[_type == "blogPost" && slug.current == $slug][0] {
     _id,
@@ -136,7 +130,7 @@ const components: PortableTextComponents = {
   },
 };
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await getBlogPost(params.slug);
   
   if (!post) {
@@ -156,7 +150,7 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await getBlogPost(params.slug);
 
   if (!post) {
