@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor } from '@/sanity/lib/image';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
 interface BlogPost {
   _id: string;
@@ -32,12 +33,11 @@ interface BlogPost {
   };
 }
 
-// Renamed the interface to avoid conflicts with Next.js's internal types
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
-}
+// This is the correct Next.js 15 prop structure
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export const revalidate = 60;
 
@@ -84,31 +84,31 @@ const components: PortableTextComponents = {
     },
   },
   block: {
-    h1: ({ children }) => 
+    h1: ({ children }) =>
       <h1 className="text-4xl font-bold my-8 text-gray-900">{children}</h1>,
-    h2: ({ children }) => 
+    h2: ({ children }) =>
       <h2 className="text-3xl font-semibold my-6 text-gray-900">{children}</h2>,
-    h3: ({ children }) => 
+    h3: ({ children }) =>
       <h3 className="text-2xl font-semibold my-5 text-gray-900">{children}</h3>,
-    h4: ({ children }) => 
+    h4: ({ children }) =>
       <h4 className="text-xl font-semibold my-4 text-gray-900">{children}</h4>,
-    blockquote: ({ children }) => 
+    blockquote: ({ children }) =>
       <blockquote className="border-l-4 border-blue-600 pl-6 py-4 italic text-gray-700 my-6 bg-blue-50 rounded-r-lg">
         {children}
       </blockquote>,
-    normal: ({ children }) => 
+    normal: ({ children }) =>
       <p className="mb-4 leading-relaxed text-gray-700">{children}</p>,
   },
   list: {
-    bullet: ({ children }) => 
+    bullet: ({ children }) =>
       <ul className="list-disc pl-6 my-4 space-y-2">{children}</ul>,
-    number: ({ children }) => 
+    number: ({ children }) =>
       <ol className="list-decimal pl-6 my-4 space-y-2">{children}</ol>,
   },
   listItem: {
-    bullet: ({ children }) => 
+    bullet: ({ children }) =>
       <li className="text-gray-700">{children}</li>,
-    number: ({ children }) => 
+    number: ({ children }) =>
       <li className="text-gray-700">{children}</li>,
   },
   marks: {
@@ -116,9 +116,9 @@ const components: PortableTextComponents = {
       const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
       const target = value.blank ? '_blank' : undefined;
       return (
-        <a 
-          href={value.href} 
-          rel={rel} 
+        <a
+          href={value.href}
+          rel={rel}
           target={target}
           className="text-blue-600 hover:text-blue-800 underline transition-colors duration-200"
         >
@@ -126,20 +126,22 @@ const components: PortableTextComponents = {
         </a>
       );
     },
-    strong: ({ children }) => 
+    strong: ({ children }) =>
       <strong className="font-semibold text-gray-900">{children}</strong>,
-    em: ({ children }) => 
+    em: ({ children }) =>
       <em className="italic">{children}</em>,
-    code: ({ children }) => 
+    code: ({ children }) =>
       <code className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm font-mono">
         {children}
       </code>,
   },
 };
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = await getBlogPost(params.slug);
-  
+// Updated generateMetadata function for Next.js 15
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
+
   if (!post) {
     return {
       title: 'Blog Post Not Found',
@@ -157,8 +159,10 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getBlogPost(params.slug);
+// Updated page component for Next.js 15
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();
@@ -203,7 +207,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               </div>
             )}
-            
+
             {/* Content */}
             <div className="p-8 md:p-12">
               {/* Meta Info */}
@@ -242,8 +246,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Back to Blog */}
           <div className="mt-12 text-center">
-            <Link 
-              href="/blog" 
+            <Link
+              href="/blog"
               className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
