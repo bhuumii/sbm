@@ -1,0 +1,1037 @@
+[
+  {
+    "fields": [
+      {
+        "description": "e.g., 'Welcome to SBM Traders'",
+        "name": "aboutTitle",
+        "type": "string",
+        "title": "About Section Title"
+      },
+      {
+        "name": "aboutDescription",
+        "type": "text",
+        "title": "About Section Description"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "aboutImage",
+        "type": "image",
+        "title": "About Section Image"
+      },
+      {
+        "name": "mapTitle",
+        "type": "string",
+        "title": "Map Section Title"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "mapLocation"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to map location"
+          }
+        ],
+        "name": "locations",
+        "type": "array",
+        "title": "Map Locations"
+      },
+      {
+        "name": "whyChooseUsTitle",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "featureItem"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to feature item"
+          }
+        ],
+        "name": "customerFeatures",
+        "type": "array",
+        "title": "Features for Customers"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "featureItem"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to feature item"
+          }
+        ],
+        "name": "manufacturerFeatures",
+        "type": "array",
+        "title": "Features for Manufacturers"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "statItem"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to stat item"
+          }
+        ],
+        "name": "stats",
+        "type": "array",
+        "title": "Stats Section"
+      },
+      {
+        "name": "productsTitle",
+        "type": "string",
+        "title": "Products Teaser Title"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "productCategory"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to product category"
+          }
+        ],
+        "name": "productCategories",
+        "type": "array",
+        "title": "Featured Product Categories"
+      },
+      {
+        "name": "galleryTitle",
+        "type": "string",
+        "title": "Gallery Teaser Title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "to": [
+              {
+                "type": "galleryImage"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to gallery image"
+          }
+        ],
+        "name": "featuredGalleryImages",
+        "type": "array"
+      }
+    ],
+    "name": "homepage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The name of the service (e.g., Quality Sourcing).",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "description": "A short explanation of this service.",
+        "name": "description",
+        "type": "text"
+      }
+    ],
+    "name": "service",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Upload the product or project image here.",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "description": "A short, descriptive caption for the image (optional).",
+        "name": "caption",
+        "type": "string"
+      }
+    ],
+    "name": "galleryImage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "The primary email will be the first one in the list.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "email",
+        "type": "array",
+        "title": "Email Addresses"
+      },
+      {
+        "description": "The primary phone number will be the first one in the list.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "phone",
+        "type": "array",
+        "title": "Phone Numbers"
+      },
+      {
+        "name": "address",
+        "type": "text",
+        "title": "Business Address"
+      }
+    ],
+    "name": "contactInfo",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Product Name"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Primary Product Image (for Category Page)"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "title": "Short Description (for Category Page Hover)"
+      },
+      {
+        "description": "Build the product page using alternating image-and-list blocks.",
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "e.g., \"Specifications\", \"Key Features\"",
+                "name": "heading",
+                "type": "string"
+              },
+              {
+                "description": "The bullet points for this section.",
+                "of": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "name": "listItems",
+                "type": "array"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "name": "image",
+                "type": "image"
+              },
+              {
+                "options": {
+                  "list": [
+                    "Left",
+                    "Right"
+                  ],
+                  "layout": "radio"
+                },
+                "initialValue": "Right",
+                "description": "Should the image be on the left or the right of the text?",
+                "name": "imagePlacement",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "contentBlock"
+          }
+        ],
+        "name": "pageBuilder",
+        "type": "array",
+        "title": "Product Page Content"
+      }
+    ],
+    "name": "product",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Category Name"
+      },
+      {
+        "options": {
+          "source": "name"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "title": "Hero Description"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Hero Image"
+      },
+      {
+        "description": "The small text that appears above the category name in the homepage carousel (e.g., 'High-Quality')",
+        "name": "tagline",
+        "type": "string",
+        "title": "Card Tagline"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "product"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to product"
+          }
+        ],
+        "name": "products",
+        "type": "array",
+        "title": "Products in this Category"
+      }
+    ],
+    "name": "productCategory",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "e.g., 'Exciting Job Opportunities Are a Click Away!'",
+        "name": "title",
+        "type": "string",
+        "title": "Main Title"
+      },
+      {
+        "description": "The paragraph of text that appears below the main title.",
+        "name": "subtitle",
+        "type": "text",
+        "title": "Subtitle / Introduction Text"
+      }
+    ],
+    "name": "careerPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "cityName",
+        "type": "string"
+      },
+      {
+        "description": "Position from top (e.g., 55.5)",
+        "name": "topPercentage",
+        "type": "number",
+        "title": "Top %"
+      },
+      {
+        "description": "Position from left (e.g., 25)",
+        "name": "leftPercentage",
+        "type": "number",
+        "title": "Left %"
+      }
+    ],
+    "name": "mapLocation",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "e.g., \"Clock\", \"ShieldCheck\", \"Handshake\". Use names from lucide-react.dev",
+        "name": "iconName",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      }
+    ],
+    "name": "featureItem",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "number",
+        "type": "string",
+        "title": "Number (e.g., 500+)"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "title": "Label (e.g., Happy Clients)"
+      }
+    ],
+    "name": "statItem",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "The short paragraph of text that appears under the logo in the footer.",
+        "name": "tagline",
+        "type": "text"
+      },
+      {
+        "description": "Enter the full number including country code, with no spaces or symbols (e.g., 919876543210).",
+        "name": "whatsAppNumber",
+        "type": "string",
+        "title": "WhatsApp Number for Floating Button"
+      },
+      {
+        "description": "Upload the QR code image for WhatsApp.",
+        "name": "whatsAppQR",
+        "type": "image",
+        "title": "WhatsApp QR Code Image"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "e.g., Facebook, Instagram, LinkedIn, WhatsApp",
+                "name": "platform",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "URL"
+              }
+            ],
+            "type": "object",
+            "name": "socialLink"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "array",
+        "title": "Social Media Links"
+      }
+    ],
+    "name": "footer",
+    "type": "document",
+    "title": "Footer & Site-wide Content"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Full Name"
+      },
+      {
+        "name": "designation",
+        "type": "string",
+        "title": "Designation / Role"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Photo"
+      }
+    ],
+    "name": "teamMember",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "e.g., 'About SBM Traders'",
+        "name": "title",
+        "type": "string",
+        "title": "Page Title"
+      },
+      {
+        "description": "The main paragraph(s) of text for the about us section.",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "longDescription",
+        "type": "array"
+      },
+      {
+        "description": "e.g., 'Meet Our Team'",
+        "name": "teamSectionTitle",
+        "type": "string"
+      },
+      {
+        "description": "Select the team members to display on the page.",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "teamMember"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to team member"
+          }
+        ],
+        "name": "teamMembers",
+        "type": "array"
+      }
+    ],
+    "name": "aboutPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "description": "Used for drag and drop ordering. Lower values appear first.",
+        "hidden": true,
+        "name": "orderRank",
+        "type": "string",
+        "title": "Order Position"
+      },
+      {
+        "initialValue": false,
+        "description": "Mark this post as featured",
+        "name": "featured",
+        "type": "boolean",
+        "title": "Featured Post"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Draft",
+              "value": "draft"
+            },
+            {
+              "title": "Published",
+              "value": "published"
+            },
+            {
+              "title": "Archived",
+              "value": "archived"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "published",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "draft",
+                  "published",
+                  "archived"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "description": "Important for SEO and accessibility",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image",
+        "title": "Main image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published at"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "A short summary for blog listing page (max 200 characters)",
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^mailto$/",
+                                    "/^tel$/"
+                                  ],
+                                  "allowRelative": false,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "name": "href",
+                      "type": "url",
+                      "title": "URL"
+                    },
+                    {
+                      "initialValue": false,
+                      "name": "blank",
+                      "type": "boolean",
+                      "title": "Open in new tab"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object",
+                  "title": "URL"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Emphasis"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bullet"
+              },
+              {
+                "value": "number",
+                "title": "Numbered"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "H1"
+              },
+              {
+                "value": "h2",
+                "title": "H2"
+              },
+              {
+                "value": "h3",
+                "title": "H3"
+              },
+              {
+                "value": "h4",
+                "title": "H4"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "description": "Important for SEO and accessibility",
+                "name": "alt",
+                "type": "string",
+                "title": "Alternative text"
+              },
+              {
+                "name": "caption",
+                "type": "string"
+              }
+            ],
+            "type": "image"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      }
+    ],
+    "name": "blogPost",
+    "type": "document"
+  }
+]

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"/><meta name="robots" content="noindex"/><meta name="referrer" content="same-origin"/><link rel="icon" href="/static/favicon.ico" sizes="any"/><link rel="icon" href="/static/favicon.svg" type="image/svg+xml"/><link rel="apple-touch-icon" href="/static/apple-touch-icon.png"/><link rel="manifest" href="/static/manifest.webmanifest"/><title>Sanity Studio</title><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"><meta name="robots" content="noindex"><meta name="referrer" content="same-origin"><link rel="icon" href="/static/favicon.ico" sizes="any"><link rel="icon" href="/static/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/static/apple-touch-icon.png"><link rel="manifest" href="/static/manifest.webmanifest"><title>Sanity Studio</title><script>
 ;(function () {
   // The error channel is provided so that error handling can be delegated to a view component.
   // If there is a subscriber to the error channel at the time the error happens, the error will be pushed to the subscriber instead of handled here.
@@ -54,6 +54,7 @@
     'line-height: 21px',
     'margin: 0 auto',
     'max-width: 960px',
+    'max-height: 90dvh',
     'overflow: auto',
     'padding: 20px',
     'width: 100%',
@@ -225,8 +226,32 @@
     margin: 0;
     -webkit-font-smoothing: antialiased;
   }
-</style><script src="https://core.sanity-cdn.com/bridge.js" async type="module" data-sanity-core></script>
-</head><body><div id="sanity"></div><script type="module" src="/static/sanity-Bgd9mtrI.js"></script><noscript><div class="sanity-app-no-js__root"><div class="sanity-app-no-js__content"><style type="text/css">
+</style><script type="application/json" id="__imports">{"imports":{"react":"/vendor/react/index-CGefqM5J.mjs","react/jsx-runtime":"/vendor/react/jsx-runtime-BUu44C77.mjs","react/jsx-dev-runtime":"/vendor/react/jsx-dev-runtime-CFcxexBp.mjs","react/compiler-runtime":"/vendor/react/compiler-runtime-CLwTdp69.mjs","react/package.json":"/vendor/react/package.json-DFhRiqsR.mjs","react-dom":"/vendor/react-dom/index-XrltE2Pv.mjs","react-dom/client":"/vendor/react-dom/client-DP8_kyeM.mjs","react-dom/server":"/vendor/react-dom/server-BBtAMGio.mjs","react-dom/static":"/vendor/react-dom/static-Czeak1uR.mjs","react-dom/package.json":"/vendor/react-dom/package.json-CRgFsXVE.mjs","styled-components":"/vendor/styled-components/index-B6R_cJop.mjs","styled-components/package.json":"/vendor/styled-components/package.json-Djg-ccVm.mjs","react-dom/server.browser":"/vendor/react-dom/server.browser-BcaFp7vp.mjs","react-dom/static.browser":"/vendor/react-dom/static.browser-DNDxQ2T6.mjs","sanity":"https://sanity-cdn.com/v1/modules/by-app/j7jw8kno7g10vcub2elmvfue/t1758314749/%5E4.9.0/sanity","sanity/":"https://sanity-cdn.com/v1/modules/by-app/j7jw8kno7g10vcub2elmvfue/t1758314749/%5E4.9.0/sanity/","@sanity/vision":"https://sanity-cdn.com/v1/modules/by-app/j7jw8kno7g10vcub2elmvfue/t1758314749/%5E4.9.0/@sanity__vision","@sanity/vision/":"https://sanity-cdn.com/v1/modules/by-app/j7jw8kno7g10vcub2elmvfue/t1758314749/%5E4.9.0/@sanity__vision/"}}</script><script>
+  // auto-generated script to add import map with timestamp
+  const importsJson = document.getElementById('__imports')?.textContent;
+  const { imports = {}, ...rest } = importsJson ? JSON.parse(importsJson) : {};
+  const importMapEl = document.createElement('script');
+  importMapEl.type = 'importmap';
+  const newTimestamp = `/t${Math.floor(Date.now() / 1000)}`;
+  importMapEl.textContent = JSON.stringify({
+    imports: Object.fromEntries(
+      Object.entries(imports).map(([specifier, path]) => {
+        try {
+          const url = new URL(path);
+          if (/^sanity-cdn\.[a-zA-Z]+$/.test(url.hostname)) {
+            url.pathname = url.pathname.replace(/\/t\d+/, newTimestamp);
+          }
+          return [specifier, url.toString()];
+        } catch {
+          return [specifier, path];
+        }
+      })
+    ),
+    ...rest,
+  });
+  document.head.appendChild(importMapEl);
+</script><script src="https://core.sanity-cdn.com/bridge.js" async type="module" data-sanity-core></script>
+</head><body><div id="sanity"></div><script type="module" src="/static/sanity-DKuLRbue.js"></script><noscript><div class="sanity-app-no-js__root"><div class="sanity-app-no-js__content"><style type="text/css">
 .sanity-app-no-js__root {
   position: absolute;
   top: 0;

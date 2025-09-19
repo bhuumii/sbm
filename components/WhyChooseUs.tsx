@@ -18,7 +18,7 @@ interface WhyChooseUsProps {
 }
 
 const DynamicIcon = ({ name, ...props }: { name: string; [key: string]: any }) => {
-  // Convert common icon names to proper Lucide names
+  
   const iconNameMap: { [key: string]: string } = {
     'handshake': 'Handshake',
     'clock': 'Clock',
@@ -117,7 +117,6 @@ export const WhyChooseUs = ({ title, customerFeatures, manufacturerFeatures }: W
           </div>
         </div>
 
-    
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left max-w-7xl mx-auto">
           {featuresToShow.map((feature, index) => (
             <div
@@ -127,11 +126,12 @@ export const WhyChooseUs = ({ title, customerFeatures, manufacturerFeatures }: W
               }`}
               style={{ transitionDelay: `${400 + index * 150}ms` }}
             >
-             <div className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 hover:border-blue-200 overflow-hidden h-[250px] flex flex-col justify-start">                {/* Background gradient on hover */}
+              <div className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 hover:border-blue-200 overflow-hidden min-h-[250px] flex flex-col justify-start">
+        
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
-              
-                <div className="relative z-10 mb-6">
+         
+                <div className="relative z-10 mb-6 flex-shrink-0">
                   <div className="w-16 h-16 bg-blue-800 rounded-2xl flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <DynamicIcon 
                       name={feature.iconName || 'HelpCircle'} 
@@ -139,21 +139,21 @@ export const WhyChooseUs = ({ title, customerFeatures, manufacturerFeatures }: W
                       className="text-white drop-shadow-sm" 
                     />
                   </div>
-                  {/* Icon glow */}
+           
                   <div className="absolute top-0 left-0 w-16 h-16 bg-blue-800 rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500"></div>
                 </div>
 
-         
-                <div className="relative z-10">
+                {/* Content section */}
+                <div className="relative z-10 flex-grow">
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-800 transition-colors duration-300">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                  <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300 text-sm md:text-base">
                     {feature.description}
                   </p>
                 </div>
 
-            
+             
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-6 group-hover:-translate-y-6 transition-transform duration-500"></div>
               </div>
             </div>

@@ -82,6 +82,13 @@ export const Navbar = () => {
               Gallery
             </Link>
             <Link
+  href="/blog"
+  className={`${pathname === "/blog" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
+>
+  Blog
+</Link>
+
+            <Link
               href="/career"
               className={`${pathname === "/career" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
             >
@@ -185,6 +192,13 @@ export const Navbar = () => {
               >
                 Gallery
               </Link>
+              <Link
+  href="/blog"
+  className={`block py-3 px-3 text-lg font-medium border-b rounded-md ${pathname === "/blog" ? "text-blue-800 bg-blue-50" : "text-gray-700 hover:bg-gray-100"}`}
+>
+  Blog
+</Link>
+
               <Link
                 href="/career"
                 className={`block py-3 px-3 text-lg font-medium border-b rounded-md ${pathname === "/career" ? "text-blue-800 bg-blue-50" : "text-gray-700 hover:bg-gray-100"}`}

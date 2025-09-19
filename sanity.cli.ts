@@ -3,13 +3,16 @@
  * Go to https://www.sanity.io/docs/cli to learn more.
  **/
 
-import { defineCliConfig } from 'sanity/cli'
+import {defineCliConfig} from 'sanity/cli'
 
 export default defineCliConfig({
   api: {
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET
+    projectId: "woyj1v91",
+    dataset: "production"
   },
-  studioHost: 'sbmtraders'
+  studioHost: 'sbmtraders',
+  deployment: {
+    appId: 'j7jw8kno7g10vcub2elmvfue',
+    autoUpdates: true
+  }
 })
-

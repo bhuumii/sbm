@@ -12,6 +12,7 @@ import mapLocation from './mapLocation'
 import footer from "./footer";
 import teamMember from './teamMember'
 import aboutPage from './aboutPage'
+import blogPost from './blogPost'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -28,6 +29,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		footer,
 		teamMember,
 		aboutPage,
+		 blogPost,
 		
 	],
 };

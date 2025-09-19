@@ -10,10 +10,14 @@
     "f": "biome format --write ."
   },
   "dependencies": {
-    "@portabletext/react": "^4.0.1",
+    "@portabletext/react": "^4.0.3",
     "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^4.2.0",
+    "@sanity/orderable-document-list": "^1.4.0",
+    "@sanity/vision": "^4.9.0",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "dotenv": "^17.2.1",
     "embla-carousel-react": "^8.6.0",
+    "esbuild": "^0.25.9",
     "lucide-react": "^0.533.0",
     "next": "15.4.4",
     "next-sanity": "^10.0.6",
@@ -21,12 +25,13 @@
     "react-dom": "19.1.0",
     "react-intersection-observer": "^9.16.0",
     "resend": "^4.7.0",
-    "sanity": "^4.2.0"
+    "sanity": "^4.9.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
     "@tailwindcss/postcss": "^4",
-    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/typography": "^0.5.18",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
