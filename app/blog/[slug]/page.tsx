@@ -1,4 +1,4 @@
-
+// app/blog/[slug]/page.tsx
 import { client } from '@/sanity/lib/client';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import Image from 'next/image';
@@ -24,6 +24,8 @@ interface BlogPost {
   excerpt: string;
   publishedAt: string;
   body: any[];
+  featured?: boolean;
+  status: 'draft' | 'published' | 'archived';
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
@@ -32,8 +34,10 @@ interface BlogPost {
 
 export const revalidate = 60;
 
-interface BlogPostPageProps {
+// Fix the interface to match Next.js expectations
+interface PageProps {
   params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
@@ -46,12 +50,14 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
     excerpt,
     publishedAt,
     body,
+    featured,
+    status,
     seo
   }`;
   return client.fetch(query, { slug });
 }
 
-
+// Properly typed PortableText components
 const components: PortableTextComponents = {
   types: {
     image: ({ value }: any) => {
@@ -130,7 +136,7 @@ const components: PortableTextComponents = {
   },
 };
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
+export async function generateMetadata({ params }: PageProps) {
   const post = await getBlogPost(params.slug);
   
   if (!post) {
@@ -150,7 +156,8 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+// Fix the function signature to match Next.js PageProps
+export default async function BlogPostPage({ params }: PageProps) {
   const post = await getBlogPost(params.slug);
 
   if (!post) {
