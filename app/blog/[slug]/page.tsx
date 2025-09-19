@@ -34,10 +34,10 @@ interface BlogPost {
 
 export const revalidate = 60;
 
-// Fix the interface to match Next.js expectations
+// ✅ Fix here: make searchParams optional
 interface PageProps {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
@@ -156,7 +156,6 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-// Fix the function signature to match Next.js PageProps
 export default async function BlogPostPage({ params }: PageProps) {
   const post = await getBlogPost(params.slug);
 
