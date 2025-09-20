@@ -21,6 +21,22 @@
         "title": "About Section Image"
       },
       {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "statItem"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to stat item"
+          }
+        ],
+        "name": "stats",
+        "type": "array",
+        "title": "Stats Section"
+      },
+      {
         "name": "mapTitle",
         "type": "string",
         "title": "Map Section Title"
@@ -78,22 +94,6 @@
         "title": "Features for Manufacturers"
       },
       {
-        "of": [
-          {
-            "to": [
-              {
-                "type": "statItem"
-              }
-            ],
-            "type": "reference",
-            "title": "Reference to stat item"
-          }
-        ],
-        "name": "stats",
-        "type": "array",
-        "title": "Stats Section"
-      },
-      {
         "name": "productsTitle",
         "type": "string",
         "title": "Products Teaser Title"
@@ -113,37 +113,6 @@
         "name": "productCategories",
         "type": "array",
         "title": "Featured Product Categories"
-      },
-      {
-        "name": "galleryTitle",
-        "type": "string",
-        "title": "Gallery Teaser Title"
-      },
-      {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "max",
-                "constraint": 3
-              }
-            ],
-            "level": "error"
-          }
-        ],
-        "of": [
-          {
-            "to": [
-              {
-                "type": "galleryImage"
-              }
-            ],
-            "type": "reference",
-            "title": "Reference to gallery image"
-          }
-        ],
-        "name": "featuredGalleryImages",
-        "type": "array"
       }
     ],
     "name": "homepage",

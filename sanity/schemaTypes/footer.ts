@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
-    
+import { MessageCircle, Linkedin, Facebook, Instagram } from 'lucide-react' // Added icon imports
+
 export default defineType({
   name: "footer",
   title: "Footer & Site-wide Content",
@@ -18,9 +19,8 @@ export default defineType({
       title: 'WhatsApp Number for Floating Button',
       description: "Enter the full number including country code, with no spaces or symbols (e.g., 919876543210).",
       type: 'string',
-    }),
-    
-   
+    }), 
+
     defineField({
       name: 'whatsAppQR',
       title: 'WhatsApp QR Code Image',
@@ -35,7 +35,7 @@ export default defineType({
       of: [
         {
           type: "object",
-            name: "socialLink",
+          name: "socialLink",
           title: "Social Link",
           fields: [
             {
@@ -46,6 +46,34 @@ export default defineType({
             },
             { name: "url", title: "URL", type: "url" },
           ],
+          // Added preview configuration to show platform-specific icons
+          preview: {
+            select: {
+              platform: 'platform',
+              url: 'url'
+            },
+            prepare({platform, url}) {
+              const platformLower = platform?.toLowerCase() || '';
+              
+              // Define icon based on platform
+              let icon;
+              if (platformLower.includes('whatsapp')) {
+                icon = MessageCircle;
+              } else if (platformLower.includes('linkedin')) {
+                icon = Linkedin;
+              } else if (platformLower.includes('facebook')) {
+                icon = Facebook;
+              } else if (platformLower.includes('instagram')) {
+                icon = Instagram;
+              }
+
+              return {
+                title: platform || 'Social Link',
+                subtitle: url,
+                media: icon
+              };
+            }
+          }
         },
       ],
     }),

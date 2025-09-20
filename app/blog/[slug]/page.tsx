@@ -1,4 +1,3 @@
-// app/blog/[slug]/page.tsx
 import { client } from '@/sanity/lib/client';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import Image from 'next/image';
@@ -33,7 +32,7 @@ interface BlogPost {
   };
 }
 
-// This is the correct Next.js 15 prop structure
+
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -58,7 +57,7 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
   return client.fetch(query, { slug });
 }
 
-// Properly typed PortableText components
+
 const components: PortableTextComponents = {
   types: {
     image: ({ value }: any) => {
@@ -137,7 +136,7 @@ const components: PortableTextComponents = {
   },
 };
 
-// Updated generateMetadata function for Next.js 15
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPost(slug);
@@ -159,7 +158,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// Updated page component for Next.js 15
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = await getBlogPost(slug);

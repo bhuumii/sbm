@@ -24,6 +24,11 @@ export default defineType({
       options: { hotspot: true }
     }),
 
+
+
+     // Stats Section ---
+    defineField({ name: 'stats', title: 'Stats Section', type: 'array', of: [{ type: 'reference', to: [{type: 'statItem'}] }] }),
+
         //  Map Section ---
     defineField({ name: 'mapTitle', title: 'Map Section Title', type: 'string' }),
     defineField({ name: 'locations', title: 'Map Locations', type: 'array', of: [{ type: 'reference', to: [{type: 'mapLocation'}] }] }),
@@ -34,11 +39,9 @@ export default defineType({
     defineField({ name: 'manufacturerFeatures', title: 'Features for Manufacturers', type: 'array', of: [{ type: 'reference', to: [{type: 'featureItem'}] }] }),
 
     
-     // Stats Section ---
-    defineField({ name: 'stats', title: 'Stats Section', type: 'array', of: [{ type: 'reference', to: [{type: 'statItem'}] }] }),
 
     
-    // --- Product and Gallery teasers ---
+    // --- Product teaser ---
     defineField({
       name: 'productsTitle',
       title: 'Products Teaser Title',
@@ -50,17 +53,6 @@ export default defineType({
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'productCategory' }] }]
     }),
-    defineField({
-      name: 'galleryTitle',
-      title: 'Gallery Teaser Title',
-      type: 'string'
-    }),
-    defineField({
-      name: 'featuredGalleryImages',
-      title: 'Featured Gallery Images',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'galleryImage' }] }],
-      validation: (Rule) => Rule.max(3),
-    }),
+    
   ],
 })

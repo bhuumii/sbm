@@ -6,7 +6,7 @@ import { StatsSection } from "@/components/StatsSection";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 
 import { ProductCarousel } from "@/components/ProductCarousel";
-import { GalleryTeaser } from "@/components/GalleryTeaser";
+
 import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
 
 
@@ -99,7 +99,9 @@ export default async function Home() {
     <div>
       <AnimatedSBMLogo />
 
-      <ScrollAnimationWrapper>
+      <ScrollAnimationWrapper> <StatsSection stats={data.stats} /></ScrollAnimationWrapper>
+
+       <ScrollAnimationWrapper>
         <AboutSummary 
           title={data.aboutTitle} 
           description={data.aboutDescription} 
@@ -107,43 +109,29 @@ export default async function Home() {
         />
       </ScrollAnimationWrapper>
 
- <ScrollAnimationWrapper>
-  <MapSection 
-        title={data.mapTitle} 
-        locations={data.locations} 
-      /></ScrollAnimationWrapper>
-       
-
       <ScrollAnimationWrapper>
         <ProductCarousel 
           title={data.productsTitle} 
           categories={data.productCategories} 
         />
       </ScrollAnimationWrapper>
-    
-<ScrollAnimationWrapper>
+
+
+ <ScrollAnimationWrapper>
+  <MapSection 
+        title={data.mapTitle} 
+        locations={data.locations} 
+      /></ScrollAnimationWrapper>
+
+      <ScrollAnimationWrapper>
   <WhyChooseUs 
         title={data.whyChooseUsTitle} 
         customerFeatures={data.customerFeatures} 
         manufacturerFeatures={data.manufacturerFeatures} 
       />
 </ScrollAnimationWrapper>
-      
-<ScrollAnimationWrapper> <StatsSection stats={data.stats} /></ScrollAnimationWrapper>
-      
+ 
 
-      
-      <ScrollAnimationWrapper>
-        <GalleryTeaser 
-          title={data.galleryTitle}
-          images={
-            data.featuredGalleryImages?.map((img) => ({
-              ...img,
-              imageUrl: urlFor(img.image).width(600).height(600).url(),
-            })) || []
-          }
-        />
-      </ScrollAnimationWrapper>
     </div>
   );
 }

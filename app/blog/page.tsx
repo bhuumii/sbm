@@ -146,17 +146,6 @@ export default async function BlogPage() {
                 ))}
               </div>
 
-              {/* Load More Button */}
-              {blogPosts.length > 0 && (
-                <div className="text-center mt-16">
-                  <div className="inline-flex items-center gap-2 px-8 py-4 bg-gray-100 text-gray-600 font-medium rounded-full hover:bg-gray-200 transition-colors duration-300 cursor-pointer">
-                    <span>More articles coming soon</span>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                  </div>
-                </div>
-              )}
             </div>
           )}
         </div>

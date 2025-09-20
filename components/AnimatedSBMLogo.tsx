@@ -15,39 +15,43 @@ export const AnimatedSBMLogo = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-[400px] bg-white relative overflow-hidden">
+    <div className="flex items-center justify-center min-h-[50vh] bg-white relative overflow-hidden pt-4 md:pt-6 pb-6 md:pb-8">
 
-     
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-blue-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-48 h-48 bg-indigo-300 rounded-full blur-2xl"></div>
+        <div className="absolute top-10 right-10 w-32 h-32 bg-blue-400 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 left-10 w-24 h-24 bg-indigo-300 rounded-full blur-xl"></div>
       </div>
 
       <div className="text-center relative z-10">
     
-        <div className="relative mb-4">
+        {/* Logo */}
+        <div className="relative mb-4 md:mb-6">
           <div className="flex items-center justify-center">
             <div className="relative">
-           
               <div className="relative transform transition-all duration-700 hover:scale-105">
                 <Image 
                   src="/MAIN.png"
                   alt="SBM Logo"
-                  width={120}
-                  height={120}
+                  width={800}
+                  height={800}
                   quality={100}
-                  className="w-80 h-80 object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500"
+                  priority={true}
+                  className="w-52 h-52 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-88 xl:h-88 object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500"
+                  style={{
+                    imageRendering: '-webkit-optimize-contrast'
+                  }}
                 />
               </div>
             </div>
           </div>
         </div>
 
-      
+     
         <div className="relative overflow-hidden">
          
+          {/* SBM TRADERS */}
           <h1 
-            className={`text-4xl lg:text-5xl font-bold text-blue-900 transition-all duration-1000 transform ${
+            className={`text-xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 transition-all duration-1000 transform ${
               showText 
                 ? 'translate-y-0 opacity-100' 
                 : 'translate-y-6 opacity-0'
@@ -56,43 +60,33 @@ export const AnimatedSBMLogo = () => {
               filter: 'drop-shadow(0 2px 4px rgba(59, 130, 246, 0.1))'
             }}
           >
-            SBM
+            SBM TRADERS
           </h1>
           
-         
-          <div className="relative mt-2">
-            <p 
-              className={`text-xl lg:text-2xl font-semibold text-blue-900 transition-all duration-1000 delay-300 transform ${
-                showText 
-                  ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-6 opacity-0'
-              } hover:text-blue-700 cursor-default tracking-wider`}
-            >
-              TRADERS
-            </p>
-            
-         
+          {/* Underline */}
+          <div className="relative mt-2 md:mt-3">
             <div 
-              className={`h-0.5 bg-gradient-to-r from-blue-500/60 to-indigo-500/60 mx-auto transition-all duration-1200 delay-600 ${
-                showText ? 'w-32' : 'w-0'
+              className={`h-0.5 md:h-1 bg-gradient-to-r from-blue-500/60 to-indigo-500/60 mx-auto transition-all duration-1200 delay-600 ${
+                showText ? 'w-24 md:w-36 lg:w-40' : 'w-0'
               }`}
             ></div>
           </div>
         </div>
 
+        
         <div 
-          className={`mt-6 transition-all duration-1000 delay-900 transform ${
+          className={`mt-3 md:mt-4 mb-4 md:mb-6 transition-all duration-1000 delay-900 transform ${
             showText 
               ? 'translate-y-0 opacity-100' 
               : 'translate-y-4 opacity-0'
           }`}
         >
-          <p className="text-slate-600 text-lg font-medium">
+          <p className="text-slate-600 text-sm md:text-base lg:text-lg font-medium">
             India's Trusted Hub for Signage & Branding Materials
           </p>
         </div>
 
-        
+      
         <style jsx>{`
           @keyframes float {
             0%, 100% { transform: translateY(0px); }
