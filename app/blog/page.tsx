@@ -24,9 +24,7 @@ interface BlogPost {
   status: 'draft' | 'published' | 'archived';
 }
 
-
 export const revalidate = 60;
-
 
 async function getBlogPosts(): Promise<BlogPost[]> {
   const query = `*[_type == "blogPost" && status == "published"] | order(orderRank asc, _createdAt desc) {
@@ -43,7 +41,6 @@ async function getBlogPosts(): Promise<BlogPost[]> {
   return client.fetch(query);
 }
 
-
 export default async function BlogPage() {
   const blogPosts = await getBlogPosts();
 
@@ -53,10 +50,10 @@ export default async function BlogPage() {
       <section className="bg-gradient-to-br from-gray-50 to-white py-20">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-6xl md:text-7xl font-bold text-blue-800 mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-4">
               Our Blog
             </h1>
-            <div className="w-24 h-1.5 bg-blue-800 mx-auto mb-8 rounded-full"></div>
+            <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-8"></div>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
               Discover insights, industry trends, and expert knowledge from the world of signage and branding
             </p>

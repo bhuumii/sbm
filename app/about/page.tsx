@@ -64,7 +64,7 @@ const portableTextComponents = {
       if (startsWithValue) {
         return (
           <div className="flex items-start mb-4">
-            <span className="inline-block w-2 h-2 bg-blue-600 rounded-full mt-2.5 mr-4 flex-shrink-0"></span>
+            <span className="inline-block w-2 h-2 bg-blue-800 rounded-full mt-2.5 mr-4 flex-shrink-0"></span>
             <p className="text-base leading-6 text-gray-700 flex-1">
               {children}
             </p>
@@ -110,7 +110,7 @@ export default async function AboutPage() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-6 leading-tight">
                 {data.title || 'Our Story'}
               </h1>
-              <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+              <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full"></div>
             </div>
           </ScrollAnimationWrapper>
         </div>
@@ -141,7 +141,7 @@ export default async function AboutPage() {
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-6">
                   {data.teamSectionTitle || 'Our Team'}
                 </h2>
-                <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                <div className="w-20 h-1 bg-blue-800 mx-auto rounded-full"></div>
               </div>
             </ScrollAnimationWrapper>
 
@@ -170,7 +170,7 @@ export default async function AboutPage() {
                         <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 leading-tight">
                           {member.name}
                         </h3>
-                        <p className="text-blue-700 font-semibold text-sm md:text-base tracking-wide uppercase">
+                        <p className="text-blue-800 font-semibold text-sm md:text-base tracking-wide uppercase">
                           {member.designation}
                         </p>
                       </div>

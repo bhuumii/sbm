@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
 import { ChevronRight } from "lucide-react";
 
+
 interface Product {
   _id: string;
   name?: string;
@@ -15,19 +16,22 @@ interface ProductCategory {
   products: Product[];
 }
 
+
 async function getProductCategories() {
   const query = `*[_type == "productCategory"]{
     _id,
     name,
-    slug, // Fetch the category slug
+    slug,
     "products": products[]->{_id, name, slug}
   } | order(name asc)`;
   const data = await client.fetch(query, {}, { cache: "no-store" });
   return data;
 }
 
+
 export default async function ProductsPage() {
   const categories: ProductCategory[] = await getProductCategories();
+
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -42,6 +46,7 @@ export default async function ProductsPage() {
             </p>
           </div>
         </ScrollAnimationWrapper>
+
 
         {categories && categories.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -58,16 +63,11 @@ export default async function ProductsPage() {
                   </Link>
                   <ul className="space-y-4 text-gray-600 flex-grow">
                     {category.products.map((product) => (
-                      <li key={product._id}>
-                        <Link
-                          href={`/products/${product.slug?.current}`}
-                          className="flex items-center justify-between group text-lg"
-                        >
-                          <span className="transition-colors group-hover:text-blue-800 group-hover:font-semibold">
-                            {product.name}
-                          </span>
-                          <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-blue-800 transition-colors" />
-                        </Link>
+                      <li key={product._id} className="flex items-center justify-between text-lg">
+                        <span className="transition-colors group-hover:text-blue-800 group-hover:font-semibold">
+                          {product.name}
+                        </span>
+                        <ChevronRight className="w-5 h-5 text-gray-300" />
                       </li>
                     ))}
                   </ul>

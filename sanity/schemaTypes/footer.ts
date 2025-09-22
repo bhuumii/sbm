@@ -46,7 +46,7 @@ export default defineType({
             },
             { name: "url", title: "URL", type: "url" },
           ],
-          // Added preview configuration to show platform-specific icons
+         
           preview: {
             select: {
               platform: 'platform',
@@ -55,7 +55,7 @@ export default defineType({
             prepare({platform, url}) {
               const platformLower = platform?.toLowerCase() || '';
               
-              // Define icon based on platform
+              
               let icon;
               if (platformLower.includes('whatsapp')) {
                 icon = MessageCircle;

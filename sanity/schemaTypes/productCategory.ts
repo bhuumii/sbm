@@ -29,7 +29,6 @@ export default defineType({
       type: "image",
       options: { hotspot: true },
     }),
-
     defineField({
       name: "tagline",
       title: "Card Tagline",
@@ -37,7 +36,6 @@ export default defineType({
         "The small text that appears above the category name in the homepage carousel (e.g., 'High-Quality')",
       type: "string",
     }),
-
     defineField({
       name: "products",
       title: "Products in this Category",

@@ -85,7 +85,7 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
                   onMouseLeave={() => setHoveredLocation(null)}
                 >
                
-                  <div className="absolute inset-0 w-6 h-6 bg-blue-800/20 rounded-full animate-ping"></div>
+                  <div className="absolute inset-0 w-6 h-6 bg-blue-800/10 rounded-full animate-pulse" style={{ animationDuration: '3s' }}></div>
                   
                   {/* Main pin */}
                   <div className={`relative w-4 h-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full shadow-lg transform transition-all duration-300 ${
@@ -104,13 +104,13 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
                    
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-900"></div>
                
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl opacity-50 blur animate-pulse -z-10"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl opacity-30 blur animate-pulse -z-10" style={{ animationDuration: '2s' }}></div>
                     </div>
                   </div>
 
              
                   {hoveredLocation === loc._id && (
-                    <div className="absolute inset-0 w-8 h-8 bg-blue-800/30 rounded-full animate-ping -translate-x-2 -translate-y-2"></div>
+                    <div className="absolute inset-0 w-8 h-8 bg-blue-800/20 rounded-full animate-pulse -translate-x-2 -translate-y-2" style={{ animationDuration: '2s' }}></div>
                   )}
                 </div>
               ))}

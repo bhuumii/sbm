@@ -59,6 +59,15 @@ export default function ProductPage() {
     return <div className="text-center p-24">Product not found.</div>;
   }
 
+  // Guard: if no content (sub-products), don’t render a page
+  if (!product.pageBuilder || product.pageBuilder.length === 0) {
+    return (
+      <div className="text-center p-24">
+        This product does not have a dedicated page.
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white">
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">

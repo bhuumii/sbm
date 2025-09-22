@@ -2,7 +2,6 @@
 
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -96,37 +95,40 @@ export default function CategoryPage() {
           {category.products &&
             category.products.map((product, index) => (
               <ScrollAnimationWrapper key={product._id} delay={index * 100}>
-                <Link
-                  href={`/products/${product.slug?.current}`}
-                  className="group block text-center"
-                >
+                <div className="group block text-center">
                   <div className="relative w-56 h-56 md:w-64 md:h-64 mx-auto">
-                    <div className="relative w-full h-full rounded-full shadow-lg overflow-hidden transform group-hover:shadow-2xl transition-all duration-300">
+                    <div className="relative w-full h-full rounded-full shadow-lg overflow-hidden">
+                      {/* Product Image */}
                       {product.image ? (
-                        <Image
-                          src={builder.image(product.image).url()}
-                          alt={product.name || "Product Image"}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="object-cover transition-all duration-300 group-hover:scale-110 group-hover:brightness-50"
-                        />
+                       <Image
+  src={builder.image(product.image).url()}
+  alt={product.name || "Product Image"}
+  fill
+  sizes="(max-width: 768px) 100vw, 33vw"
+  className="object-cover transition-all duration-300 group-hover:scale-110 group-hover:brightness-50"
+/>
+
+
                       ) : (
                         <div className="w-full h-full bg-gray-200 rounded-full"></div>
                       )}
 
-                      <div className="absolute inset-0 flex items-end justify-center p-6 pb-8 rounded-full">
-                        <div className="text-center">
-                          <h3 className="text-xl font-bold text-black drop-shadow-md transition-opacity duration-300 group-hover:opacity-0">
-                            {product.name}
-                          </h3>
-                          <p className="absolute inset-0 flex items-center justify-center p-4 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                            {product.description}
-                          </p>
-                        </div>
+             {/* Description Text */}
+<div className="absolute inset-0 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+  <p className="text-white text-sm text-center font-medium shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+    {product.description}
+  </p>
+</div>
+
+
+
+                      {/* Product Name */}
+                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs px-3 py-1 rounded">
+                        {product.name}
                       </div>
                     </div>
                   </div>
-                </Link>
+                </div>
               </ScrollAnimationWrapper>
             ))}
         </div>

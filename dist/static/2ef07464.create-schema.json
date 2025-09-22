@@ -260,55 +260,6 @@
         "name": "description",
         "type": "string",
         "title": "Short Description (for Category Page Hover)"
-      },
-      {
-        "description": "Build the product page using alternating image-and-list blocks.",
-        "of": [
-          {
-            "fields": [
-              {
-                "description": "e.g., \"Specifications\", \"Key Features\"",
-                "name": "heading",
-                "type": "string"
-              },
-              {
-                "description": "The bullet points for this section.",
-                "of": [
-                  {
-                    "type": "string"
-                  }
-                ],
-                "name": "listItems",
-                "type": "array"
-              },
-              {
-                "options": {
-                  "hotspot": true
-                },
-                "name": "image",
-                "type": "image"
-              },
-              {
-                "options": {
-                  "list": [
-                    "Left",
-                    "Right"
-                  ],
-                  "layout": "radio"
-                },
-                "initialValue": "Right",
-                "description": "Should the image be on the left or the right of the text?",
-                "name": "imagePlacement",
-                "type": "string"
-              }
-            ],
-            "type": "object",
-            "name": "contentBlock"
-          }
-        ],
-        "name": "pageBuilder",
-        "type": "array",
-        "title": "Product Page Content"
       }
     ],
     "name": "product",
