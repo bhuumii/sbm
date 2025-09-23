@@ -33,7 +33,6 @@ async function getAboutPageData(): Promise<AboutPageData> {
   return data;
 }
 
-
 const portableTextComponents = {
   block: {
     h1: ({children}: any) => (
@@ -57,7 +56,6 @@ const portableTextComponents = {
         typeof child === 'string' ? child : child?.props?.children || ''
       ).join('');
       
-   
       const valueNames = ['Integrity', 'Commitment', 'Passion', 'Seamlessness', 'Speed', 'Looking Ahead'];
       const startsWithValue = valueNames.some(value => textContent.trim().startsWith(value));
       
@@ -65,7 +63,7 @@ const portableTextComponents = {
         return (
           <div className="flex items-start mb-4">
             <span className="inline-block w-2 h-2 bg-blue-800 rounded-full mt-2.5 mr-4 flex-shrink-0"></span>
-            <p className="text-base leading-6 text-gray-700 flex-1">
+            <p className="text-base md:text-lg leading-7 text-gray-700 flex-1">
               {children}
             </p>
           </div>
@@ -73,7 +71,7 @@ const portableTextComponents = {
       }
       
       return (
-        <p className="text-base leading-6 text-gray-700 mb-4">
+        <p className="text-base md:text-lg leading-7 text-gray-700 mb-4">
           {children}
         </p>
       );
@@ -102,24 +100,19 @@ export default async function AboutPage() {
 
   return (
     <div className="bg-white">
- 
-      <div className="bg-white border-b border-gray-100">
-        <div className="container mx-auto px-6 lg:px-8 py-12">
-          <ScrollAnimationWrapper>
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-6 leading-tight">
-                {data.title || 'Our Story'}
-              </h1>
-              <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full"></div>
-            </div>
-          </ScrollAnimationWrapper>
-        </div>
-      </div>
-
-      {/* Main Content Section */}
-      <div className="container mx-auto px-6 lg:px-8 py-12">
+   
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <ScrollAnimationWrapper>
-          <div className="max-w-4xl mx-auto">
+  
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-4 leading-tight">
+              {data.title || 'Our Story'}
+            </h1>
+            <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full"></div>
+          </div>
+          
+     
+          <div className="max-w-5xl mx-auto">
             <div className="prose prose-lg max-w-none">
               <div className="space-y-6 text-gray-700 leading-relaxed">
                 <PortableText 
@@ -134,11 +127,11 @@ export default async function AboutPage() {
 
       {/* Team Section */}
       {data.teamMembers && data.teamMembers.length > 0 && (
-        <div className="bg-white border-t border-gray-100">
-          <div className="container mx-auto px-6 lg:px-8 py-12">
+        <div className="bg-gray-50 border-t border-gray-100">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <ScrollAnimationWrapper>
               <div className="text-center mb-12">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                   {data.teamSectionTitle || 'Our Team'}
                 </h2>
                 <div className="w-20 h-1 bg-blue-800 mx-auto rounded-full"></div>
@@ -146,31 +139,30 @@ export default async function AboutPage() {
             </ScrollAnimationWrapper>
 
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {data.teamMembers.map((member, index) => (
                   <ScrollAnimationWrapper 
                     key={member._id} 
                     delay={index * 100}
                     className="group"
                   >
-                    <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden text-center transform hover:-translate-y-3 transition-all duration-500 border border-gray-100">
+                    <div className="bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden text-center transform hover:-translate-y-2 transition-all duration-300 border border-gray-100">
                       {member.image && (
-                        <div className="relative w-full h-72 overflow-hidden">
+                        <div className="relative w-full h-64 overflow-hidden">
                           <Image
                             src={urlFor(member.image).url()}
                             alt={member.name || 'Team member photo'}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                       )}
                       <div className="p-6">
-                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 leading-tight">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">
                           {member.name}
                         </h3>
-                        <p className="text-blue-800 font-semibold text-sm md:text-base tracking-wide uppercase">
+                        <p className="text-blue-800 font-medium text-sm tracking-wide">
                           {member.designation}
                         </p>
                       </div>

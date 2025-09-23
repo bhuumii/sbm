@@ -4,7 +4,7 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { urlFor } from "@/sanity/client";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface CategoryLink {
   _id: string;
@@ -23,10 +23,14 @@ export const ProductCarousel = ({
   categories,
 }: ProductCarouselProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
+    loop: false, // Changed from true to false to stop infinite looping
     align: "start",
     slidesToScroll: 1,
   });
+
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi],
@@ -36,16 +40,31 @@ export const ProductCarousel = ({
     [emblaApi],
   );
 
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+  }, [emblaApi, onSelect]);
+
   if (!categories || categories.length === 0) return null;
 
-	return (
-		<section className="bg-white-50 py-16 md:py-24">
-			<div className="container mx-auto">
-				<div className="text-center px-4 sm:px-6 mb-8">
-					<h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-						{title || "Our Core Product Range"}
-					</h2>
-				</div>
+  return (
+    <section className="bg-white-50 py-16 md:py-24">
+      <div className="container mx-auto">
+        <div className="text-center px-4 sm:px-6 mb-8">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+            {title || "Product Range"}
+          </h2>
+       
+          <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full"></div>
+        </div>
 
         <div className="overflow-hidden relative" ref={emblaRef}>
           <div className="flex -ml-4">
@@ -93,18 +112,29 @@ export const ProductCarousel = ({
             ))}
           </div>
 
+         
           <div className="absolute top-1/2 left-0 right-0 flex justify-between px-2 md:hidden">
             <button
               onClick={scrollPrev}
-              className="bg-white p-2 rounded-full shadow-md"
+              disabled={!canScrollPrev}
+              className={`p-2 rounded-full shadow-md transition-all duration-200 ${
+                canScrollPrev 
+                  ? 'bg-white text-gray-700 hover:bg-gray-100' 
+                  : 'bg-gray-300 text-gray-400 cursor-not-allowed'
+              }`}
             >
-              <ArrowLeft size={20} className="text-gray-700" />
+              <ArrowLeft size={20} />
             </button>
             <button
               onClick={scrollNext}
-              className="bg-white p-2 rounded-full shadow-md"
+              disabled={!canScrollNext}
+              className={`p-2 rounded-full shadow-md transition-all duration-200 ${
+                canScrollNext 
+                  ? 'bg-white text-gray-700 hover:bg-gray-100' 
+                  : 'bg-gray-300 text-gray-400 cursor-not-allowed'
+              }`}
             >
-              <ArrowRight size={20} className="text-gray-700" />
+              <ArrowRight size={20} />
             </button>
           </div>
         </div>

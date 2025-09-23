@@ -2,25 +2,6 @@
   {
     "fields": [
       {
-        "description": "e.g., 'Welcome to SBM Traders'",
-        "name": "aboutTitle",
-        "type": "string",
-        "title": "About Section Title"
-      },
-      {
-        "name": "aboutDescription",
-        "type": "text",
-        "title": "About Section Description"
-      },
-      {
-        "options": {
-          "hotspot": true
-        },
-        "name": "aboutImage",
-        "type": "image",
-        "title": "About Section Image"
-      },
-      {
         "of": [
           {
             "to": [

@@ -32,7 +32,6 @@ interface BlogPost {
   };
 }
 
-
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -56,7 +55,6 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }`;
   return client.fetch(query, { slug });
 }
-
 
 const components: PortableTextComponents = {
   types: {
@@ -92,7 +90,7 @@ const components: PortableTextComponents = {
     h4: ({ children }) =>
       <h4 className="text-xl font-semibold my-4 text-gray-900">{children}</h4>,
     blockquote: ({ children }) =>
-      <blockquote className="border-l-4 border-blue-600 pl-6 py-4 italic text-gray-700 my-6 bg-blue-50 rounded-r-lg">
+      <blockquote className="border-l-4 border-blue-800 pl-6 py-4 italic text-gray-700 my-6 bg-blue-50 rounded-r-lg">
         {children}
       </blockquote>,
     normal: ({ children }) =>
@@ -119,7 +117,7 @@ const components: PortableTextComponents = {
           href={value.href}
           rel={rel}
           target={target}
-          className="text-blue-600 hover:text-blue-800 underline transition-colors duration-200"
+          className="text-blue-700 hover:text-blue-800 underline transition-colors duration-200"
         >
           {children}
         </a>
@@ -135,7 +133,6 @@ const components: PortableTextComponents = {
       </code>,
   },
 };
-
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -158,7 +155,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
@@ -169,25 +165,6 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Breadcrumb */}
-      <nav className="bg-white border-b border-gray-200 py-4">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-blue-600 transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <Link href="/blog" className="hover:text-blue-600 transition-colors">
-              Blog
-            </Link>
-            <span>/</span>
-            <span className="text-gray-900 font-medium truncate">
-              {post.title}
-            </span>
-          </div>
-        </div>
-      </nav>
-
       {/* Article */}
       <article className="py-12">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -211,7 +188,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="p-8 md:p-12">
               {/* Meta Info */}
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                <span className="text-xs font-semibold text-blue-800 bg-blue-50 px-3 py-1 rounded-full">
                   BLOG POST
                 </span>
                 <time className="text-sm text-gray-500">
@@ -234,7 +211,7 @@ export default async function BlogPostPage({ params }: Props) {
               </p>
 
               {/* Divider */}
-              <div className="w-24 h-1 bg-blue-600 rounded-full mb-8" />
+              <div className="w-24 h-1 bg-blue-800 rounded-full mb-8" />
 
               {/* Body Content */}
               <div className="prose prose-lg max-w-none">
@@ -247,7 +224,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="mt-12 text-center">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-blue-800 hover:text-blue-900 font-semibold transition-colors duration-200"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

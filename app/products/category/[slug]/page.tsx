@@ -74,21 +74,27 @@ export default function CategoryPage() {
             : { backgroundColor: "#333" }
         }
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-black opacity-60"></div>
         <div className="relative text-center z-10 p-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg">
             {category.name?.replace(/^\d+\.\s*/, "")}
           </h1>
-          <p className="mt-2 text-lg">{category.description}</p>
+          <p className="mt-2 text-lg text-white drop-shadow-md">{category.description}</p>
         </div>
       </div>
 
       {/* Products Grid Section */}
       <div className="container mx-auto px-6 py-12 md:py-20">
         <ScrollAnimationWrapper>
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-blue-800 mb-12">
-            Our {category.name?.replace(/^\d+\.\s*/, "")} Products
-          </h2>
+          <div className="text-center mb-12">
+         
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 opacity-0 animate-headingEnhanced">
+              Our {category.name?.replace(/^\d+\.\s*/, "")} Products
+            </h2>
+            
+         
+            <div className="w-0 h-1 bg-blue-800 mx-auto rounded-full animate-growWidth"></div>
+          </div>
         </ScrollAnimationWrapper>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16 justify-items-center">
@@ -107,20 +113,16 @@ export default function CategoryPage() {
   sizes="(max-width: 768px) 100vw, 33vw"
   className="object-cover transition-all duration-300 group-hover:scale-110 group-hover:brightness-50"
 />
-
-
                       ) : (
                         <div className="w-full h-full bg-gray-200 rounded-full"></div>
                       )}
 
-             {/* Description Text */}
+        
 <div className="absolute inset-0 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
   <p className="text-white text-sm text-center font-medium shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
     {product.description}
   </p>
 </div>
-
-
 
                       {/* Product Name */}
                       <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs px-3 py-1 rounded">
@@ -133,6 +135,46 @@ export default function CategoryPage() {
             ))}
         </div>
       </div>
+
+ 
+    
+<style jsx>{`
+  @keyframes headingEnhanced {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      filter: blur(5px);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translateY(10px) scale(0.98);
+      filter: blur(2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+  }
+
+  @keyframes growWidth {
+    from {
+      width: 0;
+    }
+    to {
+      width: 6rem;
+    }
+  }
+
+  .animate-headingEnhanced {
+    animation: headingEnhanced 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  }
+
+  .animate-growWidth {
+    animation: growWidth 1.5s ease-out 1.2s forwards;
+  }
+`}</style>
+
     </div>
   );
 }

@@ -5,24 +5,7 @@ export default defineType({
   title: 'Homepage',
   type: 'document',
   fields: [
-    // --- About Us Section ---
-    defineField({
-      name: 'aboutTitle',
-      title: 'About Section Title',
-      description: "e.g., 'Welcome to SBM Traders'",
-      type: 'string',
-    }),
-    defineField({
-      name: 'aboutDescription',
-      title: 'About Section Description',
-      type: 'text',
-    }),
-    defineField({
-      name: 'aboutImage',
-      title: 'About Section Image',
-      type: 'image',
-      options: { hotspot: true }
-    }),
+ 
 
 
 
