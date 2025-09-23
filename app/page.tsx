@@ -1,6 +1,6 @@
 import { client, urlFor } from "@/sanity/client";
 import { AnimatedSBMLogo } from "@/components/AnimatedSBMLogo";
-import { AboutSummary } from "@/components/AboutSummary";
+
 import { MapSection } from "@/components/MapSection";
 import { StatsSection } from "@/components/StatsSection";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
@@ -101,13 +101,7 @@ export default async function Home() {
 
       <ScrollAnimationWrapper> <StatsSection stats={data.stats} /></ScrollAnimationWrapper>
 
-       <ScrollAnimationWrapper>
-        <AboutSummary 
-          title={data.aboutTitle} 
-          description={data.aboutDescription} 
-          image={data.aboutImage} 
-        />
-      </ScrollAnimationWrapper>
+
 
       <ScrollAnimationWrapper>
         <ProductCarousel 

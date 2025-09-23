@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/client";
 
@@ -37,7 +37,6 @@ export const AboutSummary = ({
               {description}
             </p>
             
-            {/* Read More Button */}
             <Link 
               href="/about" 
               className="inline-flex items-center text-blue-800 hover:text-blue-900 font-medium transition-colors duration-200 group"
@@ -62,4 +61,4 @@ export const AboutSummary = ({
       </div>
     </section>
   );
-};
+}; */
