@@ -17,16 +17,15 @@ export const AnimatedSBMLogo = () => {
   return (
     <div className="flex flex-col justify-start min-h-screen bg-white relative overflow-hidden pt-4 md:pt-6">
 
-    
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 right-20 w-64 h-64 bg-blue-400 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-48 h-48 bg-indigo-300 rounded-full blur-2xl"></div>
       </div>
 
       <div className="text-center relative z-10 flex-1 flex flex-col justify-start">
-    
         
-        <div className="relative mt-4 md:mt-8">
+        {/* Logo Section - Keep your original HP Victus proportions */}
+        <div className="relative mt-2 sm:mt-4 md:mt-8">
           <div className="flex items-center justify-center">
             <div className="relative">
               <div className="relative transform transition-all duration-700 hover:scale-105">
@@ -37,7 +36,7 @@ export const AnimatedSBMLogo = () => {
                   height={1000}
                   quality={100}
                   priority={true}
-                  className="w-80 h-80 md:w-[35rem] md:h-[35rem] lg:w-[40rem] lg:h-[40rem] xl:w-[45rem] xl:h-[45rem] object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500"
+                  className="w-72 h-72 sm:w-80 sm:h-80 md:w-[35rem] md:h-[35rem] lg:w-[40rem] lg:h-[40rem] xl:w-[45rem] xl:h-[45rem] object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500"
                   style={{
                     imageRendering: '-webkit-optimize-contrast'
                   }}
@@ -47,12 +46,10 @@ export const AnimatedSBMLogo = () => {
           </div>
         </div>
 
-      
-        <div className="relative overflow-hidden -mt-6 md:-mt-12 lg:-mt-16 xl:-mt-20">
-         
-        
+        {/* Text Section - Keep your original HP Victus proportions */}
+        <div className="relative overflow-hidden -mt-4 sm:-mt-6 md:-mt-12 lg:-mt-16 xl:-mt-20">
           <h1 
-            className={`text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-blue-900 transition-all duration-1000 transform ${
+            className={`text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-blue-900 transition-all duration-1000 transform ${
               showText 
                 ? 'translate-y-0 opacity-100' 
                 : 'translate-y-6 opacity-0'
@@ -64,17 +61,17 @@ export const AnimatedSBMLogo = () => {
             SBM TRADERS
           </h1>
           
-         
+          {/* Decorative Line */}
           <div className="relative mt-0.5 md:mt-1">
             <div 
               className={`h-0.5 md:h-1 bg-gradient-to-r from-blue-500/60 to-indigo-500/60 mx-auto transition-all duration-1200 delay-600 ${
-                showText ? 'w-32 md:w-48 lg:w-56 xl:w-64' : 'w-0'
+                showText ? 'w-24 sm:w-32 md:w-48 lg:w-56 xl:w-64' : 'w-0'
               }`}
             ></div>
           </div>
         </div>
 
-      
+        {/* Tagline Section - Keep your original HP Victus proportions */}
         <div 
           className={`mt-0.5 md:mt-1 transition-all duration-1000 delay-900 transform ${
             showText 
@@ -82,7 +79,7 @@ export const AnimatedSBMLogo = () => {
               : 'translate-y-4 opacity-0'
           }`}
         >
-          <p className="text-slate-600 text-sm md:text-base lg:text-lg xl:text-xl font-medium">
+          <p className="text-slate-600 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium px-4">
             India's Trusted Hub for Signage & Branding Materials
           </p>
         </div>
@@ -101,6 +98,7 @@ export const AnimatedSBMLogo = () => {
     </div>
   );
 };
+
 
 
 
