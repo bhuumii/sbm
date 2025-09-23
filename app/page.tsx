@@ -102,7 +102,6 @@ export default async function Home() {
       <ScrollAnimationWrapper> <StatsSection stats={data.stats} /></ScrollAnimationWrapper>
 
 
-
       <ScrollAnimationWrapper>
         <ProductCarousel 
           title={data.productsTitle} 

@@ -15,17 +15,17 @@ export const AnimatedSBMLogo = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-start min-h-screen bg-white relative overflow-hidden pt-4 md:pt-6">
+    <div className="flex flex-col justify-center min-h-screen bg-white relative overflow-hidden py-4">
 
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 right-20 w-64 h-64 bg-blue-400 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-48 h-48 bg-indigo-300 rounded-full blur-2xl"></div>
       </div>
 
-      <div className="text-center relative z-10 flex-1 flex flex-col justify-start">
+      <div className="text-center relative z-10 flex flex-col justify-center items-center px-4">
         
-        {/* Logo Section - Keep your original HP Victus proportions */}
-        <div className="relative mt-2 sm:mt-4 md:mt-8">
+        {/* Logo Section - Viewport height responsive */}
+        <div className="relative">
           <div className="flex items-center justify-center">
             <div className="relative">
               <div className="relative transform transition-all duration-700 hover:scale-105">
@@ -36,9 +36,10 @@ export const AnimatedSBMLogo = () => {
                   height={1000}
                   quality={100}
                   priority={true}
-                  className="w-72 h-72 sm:w-80 sm:h-80 md:w-[35rem] md:h-[35rem] lg:w-[40rem] lg:h-[40rem] xl:w-[45rem] xl:h-[45rem] object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500"
+                  className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] xl:w-[32rem] xl:h-[32rem] 2xl:w-[36rem] 2xl:h-[36rem] object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500"
                   style={{
-                    imageRendering: '-webkit-optimize-contrast'
+                    imageRendering: '-webkit-optimize-contrast',
+                    maxHeight: '50vh'  // Ensure logo never takes more than 50% of viewport height
                   }}
                 />
               </div>
@@ -46,10 +47,10 @@ export const AnimatedSBMLogo = () => {
           </div>
         </div>
 
-        {/* Text Section - Keep your original HP Victus proportions */}
-        <div className="relative overflow-hidden -mt-4 sm:-mt-6 md:-mt-12 lg:-mt-16 xl:-mt-20">
+        {/* Text Section - Responsive to viewport */}
+        <div className="relative overflow-hidden -mt-6 sm:-mt-8 md:-mt-10 lg:-mt-12 xl:-mt-16">
           <h1 
-            className={`text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-blue-900 transition-all duration-1000 transform ${
+            className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-blue-900 transition-all duration-1000 transform ${
               showText 
                 ? 'translate-y-0 opacity-100' 
                 : 'translate-y-6 opacity-0'
@@ -62,24 +63,24 @@ export const AnimatedSBMLogo = () => {
           </h1>
           
           {/* Decorative Line */}
-          <div className="relative mt-0.5 md:mt-1">
+          <div className="relative mt-1 md:mt-2">
             <div 
               className={`h-0.5 md:h-1 bg-gradient-to-r from-blue-500/60 to-indigo-500/60 mx-auto transition-all duration-1200 delay-600 ${
-                showText ? 'w-24 sm:w-32 md:w-48 lg:w-56 xl:w-64' : 'w-0'
+                showText ? 'w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56 2xl:w-64' : 'w-0'
               }`}
             ></div>
           </div>
         </div>
 
-        {/* Tagline Section - Keep your original HP Victus proportions */}
+        {/* Tagline Section */}
         <div 
-          className={`mt-0.5 md:mt-1 transition-all duration-1000 delay-900 transform ${
+          className={`mt-2 md:mt-3 transition-all duration-1000 delay-900 transform ${
             showText 
               ? 'translate-y-0 opacity-100' 
               : 'translate-y-4 opacity-0'
           }`}
         >
-          <p className="text-slate-600 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium px-4">
+          <p className="text-slate-600 text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-medium">
             India's Trusted Hub for Signage & Branding Materials
           </p>
         </div>
@@ -92,6 +93,19 @@ export const AnimatedSBMLogo = () => {
           
           .animate-float {
             animation: float 6s ease-in-out infinite;
+          }
+
+          /* Mac-specific viewport height adjustments */
+          @media screen and (min-width: 1024px) and (max-height: 800px) {
+            .logo-container img {
+              max-height: 40vh !important;
+            }
+          }
+
+          @media screen and (min-width: 768px) and (max-height: 600px) {
+            .logo-container img {
+              max-height: 35vh !important;
+            }
           }
         `}</style>
       </div>
