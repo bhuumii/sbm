@@ -58,45 +58,44 @@ export const Navbar = () => {
   return (
     <>
       <nav className="bg-white shadow-md sticky top-0 z-30">
-        <div className="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+       
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
           <Logo />
-          <div className="hidden md:flex space-x-6 items-center">
-            {/* Desktop links remain the same */}
+          <div className="hidden md:flex space-x-8 items-center">
             <Link
               href="/"
-              className={`${pathname === "/" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
+              className={`text-lg ${pathname === "/" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
             >
               Home
             </Link>
             <Link
               href="/about"
-              className={`${pathname === "/about" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
+              className={`text-lg ${pathname === "/about" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
             >
               About Us
             </Link>
             <DesktopProductDropdown categories={categories} />
             <Link
               href="/gallery"
-              className={`${pathname === "/gallery" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
+              className={`text-lg ${pathname === "/gallery" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
             >
               Gallery
             </Link>
             <Link
-  href="/blog"
-  className={`${pathname === "/blog" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
->
-  Blog
-</Link>
-
+              href="/blog"
+              className={`text-lg ${pathname === "/blog" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
+            >
+              Blog
+            </Link>
             <Link
               href="/career"
-              className={`${pathname === "/career" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
+              className={`text-lg ${pathname === "/career" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
             >
               Career
             </Link>
             <Link
               href="/contact"
-              className={`${pathname === "/contact" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
+              className={`text-lg ${pathname === "/contact" ? "text-blue-800 font-bold" : "text-gray-600"} hover:text-blue-800`}
             >
               Contact Us
             </Link>
@@ -112,6 +111,7 @@ export const Navbar = () => {
         </div>
       </nav>
 
+     
       {isMenuOpen && (
         <>
           <div className="md:hidden fixed inset-0 z-40 pointer-events-none animate-fadeIn">
@@ -193,11 +193,11 @@ export const Navbar = () => {
                 Gallery
               </Link>
               <Link
-  href="/blog"
-  className={`block py-3 px-3 text-lg font-medium border-b rounded-md ${pathname === "/blog" ? "text-blue-800 bg-blue-50" : "text-gray-700 hover:bg-gray-100"}`}
->
-  Blog
-</Link>
+                href="/blog"
+                className={`block py-3 px-3 text-lg font-medium border-b rounded-md ${pathname === "/blog" ? "text-blue-800 bg-blue-50" : "text-gray-700 hover:bg-gray-100"}`}
+              >
+                Blog
+              </Link>
 
               <Link
                 href="/career"
@@ -231,7 +231,7 @@ const DesktopProductDropdown = ({
     <div className="relative group">
       <Link
         href="/products"
-        className={`flex items-center gap-1 hover:text-blue-800 transition-colors duration-200 ${isActive ? "text-blue-800 font-bold" : "text-gray-600"}`}
+        className={`text-lg flex items-center gap-1 hover:text-blue-800 transition-colors duration-200 ${isActive ? "text-blue-800 font-bold" : "text-gray-600"}`}
       >
         Products <ChevronDown size={16} />
       </Link>
