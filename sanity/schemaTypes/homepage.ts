@@ -9,7 +9,7 @@ export default defineType({
 
 
 
-     // Stats Section ---
+     // Stats Section --
     defineField({ name: 'stats', title: 'Stats Section', type: 'array', of: [{ type: 'reference', to: [{type: 'statItem'}] }] }),
 
         //  Map Section ---
