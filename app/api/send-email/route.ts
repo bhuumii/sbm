@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create SMTP transporter
+   
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: parseInt(process.env.SMTP_PORT || "587"),
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       },
     });
 
-    // IMPORTANT: Use await, not callback
+   
     const info = await transporter.sendMail({
       from: process.env.FROM_EMAIL,
       to: process.env.TO_EMAIL,

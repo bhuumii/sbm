@@ -23,7 +23,7 @@ export const ProductCarousel = ({
   categories,
 }: ProductCarouselProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false, // Changed from true to false to stop infinite looping
+    loop: false, 
     align: "start",
     slidesToScroll: 1,
   });
@@ -57,16 +57,16 @@ export const ProductCarousel = ({
 
   return (
     <section className="bg-white-50 py-16 md:py-24">
-      <div className="container mx-auto">
+     
+      <div className="container mx-auto relative">
         <div className="text-center px-4 sm:px-6 mb-8">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
             {title || "Product Range"}
           </h2>
-       
           <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full"></div>
         </div>
 
-        <div className="overflow-hidden relative" ref={emblaRef}>
+        <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex -ml-4">
             {categories.map((category) => (
               <div
@@ -97,7 +97,6 @@ export const ProductCarousel = ({
                       <h3 className="text-2xl font-bold transition-colors duration-300 text-white group-hover:text-black">
                         {category.name?.replace(/^\d+\.\s*/, "")}
                       </h3>
-
                       <div
                         className="absolute top-0 right-0 bg-blue-800 text-white p-3 rounded-full
                                   opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
@@ -111,32 +110,60 @@ export const ProductCarousel = ({
               </div>
             ))}
           </div>
+        </div>
 
-         
-          <div className="absolute top-1/2 left-0 right-0 flex justify-between px-2 md:hidden">
+    
+        {(canScrollPrev || canScrollNext) && (
+          <div className="hidden md:block">
             <button
               onClick={scrollPrev}
               disabled={!canScrollPrev}
-              className={`p-2 rounded-full shadow-md transition-all duration-200 ${
+              className={`absolute top-1/2 -translate-y-1/2 -left-8 z-10 p-3 rounded-full shadow-lg transition-all duration-200 ${
                 canScrollPrev 
-                  ? 'bg-white text-gray-700 hover:bg-gray-100' 
-                  : 'bg-gray-300 text-gray-400 cursor-not-allowed'
+                  ? 'bg-white text-gray-800 hover:bg-gray-100 hover:scale-110' 
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
-              <ArrowLeft size={20} />
+              <ArrowLeft size={24} />
             </button>
             <button
               onClick={scrollNext}
               disabled={!canScrollNext}
-              className={`p-2 rounded-full shadow-md transition-all duration-200 ${
+              className={`absolute top-1/2 -translate-y-1/2 -right-8 z-10 p-3 rounded-full shadow-lg transition-all duration-200 ${
                 canScrollNext 
-                  ? 'bg-white text-gray-700 hover:bg-gray-100' 
-                  : 'bg-gray-300 text-gray-400 cursor-not-allowed'
+                  ? 'bg-white text-gray-800 hover:bg-gray-100 hover:scale-110' 
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
-              <ArrowRight size={20} />
+              <ArrowRight size={24} />
             </button>
           </div>
+        )}
+
+        
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-2 md:hidden">
+          <button
+            onClick={scrollPrev}
+            disabled={!canScrollPrev}
+            className={`p-2 rounded-full shadow-md transition-all duration-200 ${
+              canScrollPrev 
+                ? 'bg-white text-gray-700 hover:bg-gray-100' 
+                : 'bg-gray-300 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            <ArrowLeft size={20} />
+          </button>
+          <button
+            onClick={scrollNext}
+            disabled={!canScrollNext}
+            className={`p-2 rounded-full shadow-md transition-all duration-200 ${
+              canScrollNext 
+                ? 'bg-white text-gray-700 hover:bg-gray-100' 
+                : 'bg-gray-300 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            <ArrowRight size={20} />
+          </button>
         </div>
       </div>
     </section>

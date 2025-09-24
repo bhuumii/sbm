@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       },
     });
 
-    // IMPORTANT: Use await, not callback
+ 
     const info = await transporter.sendMail({
       from: process.env.FROM_EMAIL,
       to: process.env.TO_EMAIL,
