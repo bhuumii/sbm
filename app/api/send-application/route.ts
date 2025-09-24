@@ -31,11 +31,11 @@ export async function POST(request: Request) {
       },
     });
 
-
-    const mailOptions = {
+    // IMPORTANT: Use await, not callback
+    const info = await transporter.sendMail({
       from: process.env.FROM_EMAIL,
       to: process.env.TO_EMAIL,
-      replyTo: email, 
+      replyTo: email,
       subject: `New Job Application from ${firstName} ${lastName}`,
       html: `
         <h1>New Job Application</h1>
@@ -44,8 +44,6 @@ export async function POST(request: Request) {
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Message:</strong></p>
         <p>${message || "No message provided."}</p>
-        <hr>
-        <p><em>Resume attached. Reply directly to this email to contact the applicant.</em></p>
       `,
       attachments: [
         {
@@ -53,9 +51,9 @@ export async function POST(request: Request) {
           content: buffer,
         },
       ],
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
+    console.log("Application sent successfully:", info.messageId);
 
     return NextResponse.json({ 
       message: "Application sent successfully",
@@ -65,7 +63,7 @@ export async function POST(request: Request) {
     console.error("Email sending error:", error);
     return NextResponse.json(
       { error: error.message || "Something went wrong." },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
