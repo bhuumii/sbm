@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor } from '@/sanity/lib/image';
 import NewsletterForm from '@/components/NewsletterForm';
+import { PenTool } from 'lucide-react';
 
 interface BlogPost {
   _id: string;
@@ -51,11 +52,16 @@ export default async function BlogPage() {
       <section className="bg-gradient-to-br from-gray-50 to-white py-20">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-4">
-              Our Blog
-            </h1>
-            <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-8"></div>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="p-3 bg-blue-100 rounded-full">
+                <PenTool className="w-8 h-8 text-blue-800" />
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
+                Our Blog
+              </h1>
+            </div>
+            <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Discover insights, industry trends, and expert knowledge from the world of signage and branding
             </p>
           </div>
@@ -63,7 +69,7 @@ export default async function BlogPage() {
       </section>
 
       {/* Blog Posts Section */}
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           {blogPosts.length === 0 ? (
             <div className="text-center py-20">

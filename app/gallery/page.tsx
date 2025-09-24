@@ -4,6 +4,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
+import { Images } from "lucide-react";
 
 const builder = imageUrlBuilder(client);
 
@@ -42,10 +43,16 @@ export default function GalleryPage() {
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
         <ScrollAnimationWrapper>
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Our Gallery
-            </h1>
-            <p className="text-gray-600 mt-2">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="p-3 bg-blue-100 rounded-full">
+                <Images className="w-8 h-8 text-blue-800" />
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
+                Our Gallery
+              </h1>
+            </div>
+            <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               A showcase of our premium materials and solutions in action.
             </p>
           </div>

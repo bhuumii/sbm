@@ -61,7 +61,7 @@ export default async function ProductsPage() {
             {categories.map((category, index) => (
               <ScrollAnimationWrapper key={category._id} delay={index * 150}>
                 <div className="group bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                  {/* Gradient header with icon */}
+             
                   <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 border-b border-gray-100">
                     <Link
                       href={`/products/category/${category.slug?.current}`}

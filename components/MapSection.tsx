@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
+import { MapPin } from 'lucide-react';
 
 interface Location { 
   _id: string; 
@@ -36,7 +37,6 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
     return () => observer.disconnect();
   }, []);
 
-  
   if (!locations || locations.length === 0) return null;
 
   return (
@@ -49,13 +49,17 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
         <div className={`text-center transform transition-all duration-700 ease-out mb-16 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-4">
-            {title || 'Our Global Footprint'}
-          </h2>
-          <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full"></div>
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className="p-3 bg-blue-100 rounded-full">
+              <MapPin className="w-8 h-8 text-blue-800" />
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
+              {title || 'Locations we serve'}
+            </h2>
+          </div>
+          <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
         </div>
 
-    
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center max-w-7xl mx-auto">
           
           {/* Map Container  */}
@@ -95,7 +99,6 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
                     <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
                   </div>
 
-           
                   <div className={`absolute bottom-full mb-4 left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
                     hoveredLocation === loc._id ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-2 invisible'
                   }`}>
@@ -108,14 +111,12 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
                     </div>
                   </div>
 
-             
                   {hoveredLocation === loc._id && (
                     <div className="absolute inset-0 w-8 h-8 bg-blue-800/20 rounded-full animate-pulse -translate-x-2 -translate-y-2" style={{ animationDuration: '2s' }}></div>
                   )}
                 </div>
               ))}
 
-              
               <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-full"></div>
               <div className="absolute bottom-4 left-4 w-20 h-20 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-full"></div>
             </div>
@@ -165,12 +166,11 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
               </div>
             </div>
 
-           
           </div>
         </div>
       </div>
 
-      {/* Custom animation styles */}
+    
       <style jsx>{`
         @keyframes bounce-once {
           0%, 100% { transform: translateY(0); }

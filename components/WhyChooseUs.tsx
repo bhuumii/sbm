@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { ScrollAnimationWrapper } from './ScrollAnimationWrapper';
-import { type LucideProps } from 'lucide-react';
+import { type LucideProps, Star } from 'lucide-react';
 import * as icons from 'lucide-react';
 
 interface Feature { 
@@ -78,10 +78,15 @@ export const WhyChooseUs = ({ title, customerFeatures, manufacturerFeatures }: W
         <div className={`transform transition-all duration-700 ease-out mb-12 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-4">
-            {title || 'Why Choose Us?'}
-          </h2>
-          <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full"></div>
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className="p-3 bg-blue-100 rounded-full">
+              <Star className="w-8 h-8 text-blue-800" />
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
+              {title || 'Why Choose Us?'}
+            </h2>
+          </div>
+          <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
         </div>
 
         <div className={`flex justify-center gap-2 mb-12 transform transition-all duration-700 ease-out ${
@@ -130,7 +135,6 @@ export const WhyChooseUs = ({ title, customerFeatures, manufacturerFeatures }: W
         
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
-         
                 <div className="relative z-10 mb-6 flex-shrink-0">
                   <div className="w-16 h-16 bg-blue-800 rounded-2xl flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <DynamicIcon 
@@ -139,11 +143,9 @@ export const WhyChooseUs = ({ title, customerFeatures, manufacturerFeatures }: W
                       className="text-white drop-shadow-sm" 
                     />
                   </div>
-           
                   <div className="absolute top-0 left-0 w-16 h-16 bg-blue-800 rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500"></div>
                 </div>
 
-                {/* Content section */}
                 <div className="relative z-10 flex-grow">
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-800 transition-colors duration-300">
                     {feature.title}
@@ -153,7 +155,6 @@ export const WhyChooseUs = ({ title, customerFeatures, manufacturerFeatures }: W
                   </p>
                 </div>
 
-             
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-6 group-hover:-translate-y-6 transition-transform duration-500"></div>
               </div>
             </div>

@@ -2,7 +2,7 @@
 
 import { client } from "@/sanity/client";
 import { ContactForm } from "@/components/ContactForm";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface ContactInfo {
@@ -27,16 +27,22 @@ export default function ContactPage() {
     <div className="bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-            Contact Us
-          </h1>
-          <p className="text-gray-600 mt-2">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className="p-3 bg-blue-100 rounded-full">
+              <MessageCircle className="w-8 h-8 text-blue-800" />
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
+              Contact Us
+            </h1>
+          </div>
+          <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             We're here to help. Reach out to us anytime.
           </p>
         </div>
 
         <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Side: Contact Details & Map */}
+         
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
@@ -86,7 +92,6 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Right Side: Contact Form */}
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
               Send Us a Message

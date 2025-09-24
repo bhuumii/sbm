@@ -9,7 +9,7 @@ export const AnimatedSBMLogo = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowText(true);
-    }, 1500);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
