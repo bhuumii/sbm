@@ -15,7 +15,6 @@ export const AnimatedSBMLogo = () => {
   }, []);
 
   return (
-   
     <div className="flex flex-col justify-start md:justify-center items-center min-h-[calc(100vh - 3.5rem)] bg-white relative overflow-hidden pt-8 md:pt-0">
       
       <div className="absolute inset-0 opacity-5">
@@ -33,14 +32,16 @@ export const AnimatedSBMLogo = () => {
             height={1000}
             quality={100}
             priority={true}
-            className="w-auto h-auto max-w-[90vw] md:max-w-[45rem] max-h-[65vh] object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500"
+          
+            className="w-auto h-auto max-w-[90vw] md:max-w-[55rem] max-h-[65vh] md:max-h-[80vh] object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500"
             style={{
               imageRendering: '-webkit-optimize-contrast',
             }}
           />
         </div>
 
-        <div className="relative -mt-4 md:-mt-8">
+    
+        <div className="relative -mt-4 md:-mt-16">
           <div className="relative overflow-hidden">
             <h1
               className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-blue-900 transition-all duration-1000 transform ${
