@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { ScrollAnimationWrapper } from './ScrollAnimationWrapper';
-import { type LucideProps, Star } from 'lucide-react';
+import { type LucideProps } from 'lucide-react';
 import * as icons from 'lucide-react';
 
 interface Feature { 
@@ -78,14 +77,9 @@ export const WhyChooseUs = ({ title, customerFeatures, manufacturerFeatures }: W
         <div className={`transform transition-all duration-700 ease-out mb-12 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="p-3 bg-blue-100 rounded-full">
-              <Star className="w-8 h-8 text-blue-800" />
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
-              {title || 'Why Choose Us?'}
-            </h2>
-          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+            {title || 'Why Choose Us?'}
+          </h2>
           <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
         </div>
 

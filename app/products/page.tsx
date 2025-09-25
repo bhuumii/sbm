@@ -1,7 +1,7 @@
 import { client } from "@/sanity/client";
 import Link from "next/link";
 import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
-import { ChevronRight, Package, Layers } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 interface Product {
   _id: string;
@@ -41,14 +41,9 @@ export default async function ProductsPage() {
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16 relative z-10">
         <ScrollAnimationWrapper>
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="p-3 bg-blue-100 rounded-full">
-                <Layers className="w-8 h-8 text-blue-800" />
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
-                Our Product List
-              </h1>
-            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+              Our Product List
+            </h1>
             <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               A comprehensive overview of our premium materials and supplies.
@@ -67,21 +62,15 @@ export default async function ProductsPage() {
                       href={`/products/category/${category.slug?.current}`}
                       className="flex items-center justify-between group-hover:scale-[1.02] transition-transform duration-300"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-white rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300">
-                          <Package className="w-5 h-5 text-blue-700" />
-                        </div>
-                        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-blue-800 transition-colors duration-300">
-                          {category.name?.replace(/^\d+\.\s*/, "")}
-                        </h2>
-                      </div>
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-blue-800 transition-colors duration-300">
+                        {category.name?.replace(/^\d+\.\s*/, "")}
+                      </h2>
                       <div className="bg-white/80 p-2 rounded-full group-hover:bg-blue-50 transition-all duration-300">
                         <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-blue-700 group-hover:translate-x-1 transition-all duration-300" />
                       </div>
                     </Link>
                   </div>
                   
-             
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
@@ -104,7 +93,6 @@ export default async function ProductsPage() {
                       ))}
                     </div>
                     
-                   
                     <div className="mt-6 pt-4 border-t border-gray-100">
                       <Link
                         href={`/products/category/${category.slug?.current}`}
@@ -121,9 +109,6 @@ export default async function ProductsPage() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <div className="mb-6">
-              <Package className="w-16 h-16 text-gray-300 mx-auto" />
-            </div>
             <p className="text-xl text-gray-500 mb-4">
               Product categories will be listed here soon.
             </p>

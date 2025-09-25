@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
-import { MapPin } from 'lucide-react';
 
 interface Location { 
   _id: string; 
@@ -49,14 +48,9 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
         <div className={`text-center transform transition-all duration-700 ease-out mb-16 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="p-3 bg-blue-100 rounded-full">
-              <MapPin className="w-8 h-8 text-blue-800" />
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
-              {title || 'Locations we serve'}
-            </h2>
-          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+            {title || 'Locations we serve'}
+          </h2>
           <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
         </div>
 
@@ -170,7 +164,6 @@ export const MapSection = ({ title, locations }: MapSectionProps) => {
         </div>
       </div>
 
-    
       <style jsx>{`
         @keyframes bounce-once {
           0%, 100% { transform: translateY(0); }

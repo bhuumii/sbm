@@ -13,7 +13,7 @@ export const Breadcrumbs = () => {
   const pathSegments = pathname.split("/").filter((p) => p && p !== "category");
 
   return (
-    <div className="bg-gray-100 py-3">
+    <div className="bg-gray-100 py-3 sticky top-16 z-40 border-b border-gray-200">
       <div className="container mx-auto px-6">
         <nav
           className="flex items-center text-sm text-gray-500"

@@ -2,7 +2,6 @@ import { client, urlFor } from "@/sanity/client";
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
-import { Info, Users } from "lucide-react";
 
 interface TeamMember {
   _id: string;
@@ -106,14 +105,9 @@ export default async function AboutPage() {
         <ScrollAnimationWrapper>
   
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="p-3 bg-blue-100 rounded-full">
-                <Info className="w-8 h-8 text-blue-800" />
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
-                {data.title || 'About Us'}
-              </h1>
-            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+              {data.title || 'About Us'}
+            </h1>
             <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
           </div>
           
@@ -136,14 +130,9 @@ export default async function AboutPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <ScrollAnimationWrapper>
               <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-blue-100 rounded-full">
-                    <Users className="w-8 h-8 text-blue-800" />
-                  </div>
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
-                    {data.teamSectionTitle || 'Our Team'}
-                  </h2>
-                </div>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+                  {data.teamSectionTitle || 'Our Team'}
+                </h2>
                 <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
               </div>
             </ScrollAnimationWrapper>
