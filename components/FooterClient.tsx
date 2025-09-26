@@ -13,6 +13,7 @@ import {
   Linkedin,
 } from "lucide-react";
 
+
 interface FooterData {
   footerLogo?: any;
   tagline?: string;
@@ -21,11 +22,13 @@ interface FooterData {
   whatsAppNumber?: string;
 }
 
+
 interface ContactInfo {
   email?: string[];
   phone?: string[];
   address?: string;
 }
+
 
 const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
   <svg 
@@ -38,6 +41,7 @@ const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
   </svg>
 );
 
+
 const SocialIcon = ({ platform }: { platform: string }) => {
   if (platform.toLowerCase() === "facebook") return <Facebook size={20} />;
   if (platform.toLowerCase() === "instagram") return <Instagram size={20} />;
@@ -46,15 +50,19 @@ const SocialIcon = ({ platform }: { platform: string }) => {
   return null;
 };
 
+
 export const FooterClient = ({ footer, contact }: { footer: FooterData; contact: ContactInfo }) => {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+
   const isDark = mounted && resolvedTheme === "dark";
+
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -66,20 +74,21 @@ export const FooterClient = ({ footer, contact }: { footer: FooterData; contact:
     { href: "/contact", label: "Contact Us" },
   ];
 
+
   return (
     <footer className={`${
       isDark 
-        ? "bg-gray-300 text-gray-700"
+        ? "bg-white text-gray-700"
         : "bg-gray-800 text-gray-300"        
     }`}>
-      <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6 py-8 md:py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1: Logo & Tagline */}
-          <div className="space-y-6 md:col-span-1 flex flex-col items-center md:items-start">
+          <div className="space-y-6 md:col-span-1 flex flex-col justify-center md:items-start">
             <Image 
               src={isDark ? "/assets/light.png" : "/assets/dark.png"}    
               alt="SBM Traders Footer Logo"
-              width={200}
+              width={250}
               height={100}
               className="object-contain" 
             />
@@ -88,8 +97,9 @@ export const FooterClient = ({ footer, contact }: { footer: FooterData; contact:
             }`}>{footer?.tagline}</p>
           </div>
 
+
           {/* Column 2: Quick Links */}
-          <div className="md:mx-auto">
+          <div className="md:mx-auto text-center">
             <h3 className={`text-lg font-semibold mb-4 ${
               isDark ? "text-gray-900" : "text-white"
             }`}>
@@ -112,6 +122,7 @@ export const FooterClient = ({ footer, contact }: { footer: FooterData; contact:
               ))}
             </ul>
           </div>
+
 
           {/* Column 3: Contact Info */}
           <div>
@@ -208,9 +219,9 @@ export const FooterClient = ({ footer, contact }: { footer: FooterData; contact:
           </div>
         </div>
       </div>
-      <div className={`py-4 ${
+      <div className={`py-3 ${
         isDark 
-          ? "bg-gray-400"                  
+          ? "bg-gray-100"                  
           : "bg-black bg-opacity-10"         
       }`}>
         <div className={`container mx-auto px-4 sm:px-6 text-center text-sm ${

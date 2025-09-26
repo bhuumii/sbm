@@ -24,7 +24,7 @@ export const AnimatedSBMLogo = () => {
   const isDark = mounted && resolvedTheme === "dark";
 
   return (
-    <div className={`flex flex-col justify-start md:justify-center items-center min-h-[calc(100vh - 3.5rem)] ${isDark ? "bg-gray-900" : "bg-white"} relative overflow-hidden pt-8 md:pt-0`}>
+    <div className={`flex flex-col justify-start md:justify-center items-center min-h-[calc(100vh - 2rem)] ${isDark ? "bg-gray-900" : "bg-white"} relative overflow-hidden pt-8 md:pt-0`}>
       
     
       <div className="absolute inset-0 opacity-5">

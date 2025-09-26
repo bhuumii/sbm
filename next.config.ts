@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Existing styled components config
+ 
   compiler: {
     styledComponents: true,
     removeConsole: process.env.NODE_ENV === 'production',
@@ -23,12 +23,12 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Experimental optimizations - REMOVED CSS optimization
+  
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
 
-  // Headers for better caching
+ 
   async headers() {
     return [
       {
