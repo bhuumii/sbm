@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,14 @@ export const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === "dark";
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -50,7 +59,9 @@ export const ContactForm = () => {
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
+          className={`block text-sm font-medium ${
+            isDark ? "text-gray-300" : "text-gray-700"
+          }`}
         >
           Full Name
         </label>
@@ -61,13 +72,19 @@ export const ContactForm = () => {
           required
           value={formData.name}
           onChange={handleChange}
-          className="text-gray-900 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+            isDark 
+              ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400" 
+              : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+          }`}
         />
       </div>
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700"
+          className={`block text-sm font-medium ${
+            isDark ? "text-gray-300" : "text-gray-700"
+          }`}
         >
           Email Address
         </label>
@@ -78,14 +95,20 @@ export const ContactForm = () => {
           required
           value={formData.email}
           onChange={handleChange}
-          className="text-gray-900 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+            isDark 
+              ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400" 
+              : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+          }`}
         />
       </div>
 
       <div>
         <label
           htmlFor="phone"
-          className="block text-sm font-medium text-gray-700"
+          className={`block text-sm font-medium ${
+            isDark ? "text-gray-300" : "text-gray-700"
+          }`}
         >
           Phone Number
         </label>
@@ -96,14 +119,20 @@ export const ContactForm = () => {
           required
           value={formData.phone}
           onChange={handleChange}
-          className="text-gray-900 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+            isDark 
+              ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400" 
+              : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+          }`}
         />
       </div>
 
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-gray-700"
+          className={`block text-sm font-medium ${
+            isDark ? "text-gray-300" : "text-gray-700"
+          }`}
         >
           Enquiry Detail
         </label>
@@ -114,20 +143,32 @@ export const ContactForm = () => {
           required
           value={formData.message}
           onChange={handleChange}
-          className="text-gray-900 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 resize-vertical ${
+            isDark 
+              ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400" 
+              : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+          }`}
         ></textarea>
       </div>
       <div>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
+          className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed ${
+            isDark 
+              ? "bg-blue-700 hover:bg-blue-800" 
+              : "bg-blue-800 hover:bg-blue-900"
+          }`}
         >
           {isSubmitting ? "Sending..." : "Send Message"}
         </button>
       </div>
       {responseMessage && (
-        <p className="text-center text-sm text-gray-800 font-medium mt-4">
+        <p className={`text-center text-sm font-medium mt-4 ${
+          responseMessage.includes("successfully") 
+            ? isDark ? "text-green-400" : "text-green-600"
+            : isDark ? "text-red-400" : "text-red-600"
+        }`}>
           {responseMessage}
         </p>
       )}

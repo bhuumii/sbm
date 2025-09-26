@@ -5,12 +5,12 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { WhatsAppButton } from "@/components/Whatsapp"; 
-import { client } from "@/sanity/client"; 
+import { client } from "@/sanity/client";
+import { ThemeProvider } from 'next-themes';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = { /* ... */ };
-
 
 async function getSiteData() {
   const query = `*[_type == "footer"][0]{ whatsAppNumber }`;
@@ -22,18 +22,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const siteData = await getSiteData(); 
 
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-white`}>
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <Breadcrumbs />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </div>
-     
-        <WhatsAppButton phoneNumber={siteData?.whatsAppNumber} />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-white dark:bg-gray-900 transition-colors duration-300`}>
+        <ThemeProvider 
+          attribute="class" 
+           defaultTheme="system"  
+  enableSystem={true}   
+          disableTransitionOnChange
+        >
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <Breadcrumbs />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </div>
+          <WhatsAppButton phoneNumber={siteData?.whatsAppNumber} />
+        </ThemeProvider>
       </body>
     </html>
   );

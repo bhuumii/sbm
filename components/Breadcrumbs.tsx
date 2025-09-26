@@ -3,9 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useState, useEffect } from 'react';
 
 export const Breadcrumbs = () => {
   const pathname = usePathname();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === "dark";
+
   if (pathname === "/") {
     return null;
   }
@@ -13,15 +24,25 @@ export const Breadcrumbs = () => {
   const pathSegments = pathname.split("/").filter((p) => p && p !== "category");
 
   return (
-    <div className="bg-gray-100 py-3 sticky top-16 z-40 border-b border-gray-200">
+    <div className={`py-3 sticky top-16 z-20 border-b ${
+      isDark 
+        ? "bg-gray-800 border-gray-700" 
+        : "bg-gray-100 border-gray-200"
+    }`}>
       <div className="container mx-auto px-6">
         <nav
-          className="flex items-center text-sm text-gray-500"
+          className={`flex items-center text-sm ${
+            isDark ? "text-gray-400" : "text-gray-500"
+          }`}
           aria-label="Breadcrumb"
         >
           <Link
             href="/"
-            className="hover:text-blue-800 flex items-center gap-2"
+            className={`flex items-center gap-2 transition-colors ${
+              isDark 
+                ? "hover:text-blue-400" 
+                : "hover:text-blue-800"
+            }`}
           >
             <Home size={16} />
             Home
@@ -60,7 +81,15 @@ export const Breadcrumbs = () => {
                 <span className="mx-2">/</span>
                 <Link
                   href={isLast ? pathname : correctedHref}
-                  className={`${isLast ? "text-gray-700 font-semibold cursor-default" : "hover:text-blue-800"}`}
+                  className={`transition-colors ${
+                    isLast 
+                      ? isDark 
+                        ? "text-gray-200 font-semibold cursor-default" 
+                        : "text-gray-700 font-semibold cursor-default"
+                      : isDark
+                        ? "hover:text-blue-400"
+                        : "hover:text-blue-800"
+                  }`}
                   aria-current={isLast ? "page" : undefined}
                 >
                   {title}

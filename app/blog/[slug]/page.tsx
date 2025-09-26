@@ -1,10 +1,8 @@
 import { client } from '@/sanity/lib/client';
-import { PortableText, PortableTextComponents } from '@portabletext/react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { urlFor } from '@/sanity/lib/image';
+import { BlogPostClient } from '@/components/BlogPostClient';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { urlFor } from '@/sanity/lib/image';
 
 interface BlogPost {
   _id: string;
@@ -56,84 +54,6 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
   return client.fetch(query, { slug });
 }
 
-const components: PortableTextComponents = {
-  types: {
-    image: ({ value }: any) => {
-      if (!value?.asset) return null;
-      return (
-        <figure className="my-8">
-          <div className="relative w-full h-80 md:h-96 lg:h-[500px] rounded-lg overflow-hidden shadow-lg">
-            <Image
-              src={urlFor(value).url()}
-              alt={value.alt || 'Blog Post Image'}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 60vw"
-            />
-          </div>
-          {value.caption && (
-            <figcaption className="text-center text-sm text-gray-600 mt-3 italic">
-              {value.caption}
-            </figcaption>
-          )}
-        </figure>
-      );
-    },
-  },
-  block: {
-    h1: ({ children }) =>
-      <h1 className="text-4xl font-bold my-8 text-gray-900">{children}</h1>,
-    h2: ({ children }) =>
-      <h2 className="text-3xl font-semibold my-6 text-gray-900">{children}</h2>,
-    h3: ({ children }) =>
-      <h3 className="text-2xl font-semibold my-5 text-gray-900">{children}</h3>,
-    h4: ({ children }) =>
-      <h4 className="text-xl font-semibold my-4 text-gray-900">{children}</h4>,
-    blockquote: ({ children }) =>
-      <blockquote className="border-l-4 border-blue-800 pl-6 py-4 italic text-gray-700 my-6 bg-blue-50 rounded-r-lg">
-        {children}
-      </blockquote>,
-    normal: ({ children }) =>
-      <p className="mb-4 leading-relaxed text-gray-700">{children}</p>,
-  },
-  list: {
-    bullet: ({ children }) =>
-      <ul className="list-disc pl-6 my-4 space-y-2">{children}</ul>,
-    number: ({ children }) =>
-      <ol className="list-decimal pl-6 my-4 space-y-2">{children}</ol>,
-  },
-  listItem: {
-    bullet: ({ children }) =>
-      <li className="text-gray-700">{children}</li>,
-    number: ({ children }) =>
-      <li className="text-gray-700">{children}</li>,
-  },
-  marks: {
-    link: ({ children, value }: any) => {
-      const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
-      const target = value.blank ? '_blank' : undefined;
-      return (
-        <a
-          href={value.href}
-          rel={rel}
-          target={target}
-          className="text-blue-700 hover:text-blue-800 underline transition-colors duration-200"
-        >
-          {children}
-        </a>
-      );
-    },
-    strong: ({ children }) =>
-      <strong className="font-semibold text-gray-900">{children}</strong>,
-    em: ({ children }) =>
-      <em className="italic">{children}</em>,
-    code: ({ children }) =>
-      <code className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm font-mono">
-        {children}
-      </code>,
-  },
-};
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPost(slug);
@@ -163,77 +83,5 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  return (
-    <main className="min-h-screen bg-gray-50">
-      {/* Article */}
-      <article className="py-12">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            {/* Hero Image */}
-            {post.mainImage && (
-              <div className="relative w-full h-64 md:h-80 lg:h-96">
-                <Image
-                  src={urlFor(post.mainImage).url()}
-                  alt={post.mainImage.alt || post.title}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  sizes="100vw"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              </div>
-            )}
-
-            {/* Content */}
-            <div className="p-8 md:p-12">
-              {/* Meta Info */}
-              <div className="flex items-center gap-4 mb-6">
-                <span className="text-xs font-semibold text-blue-800 bg-blue-50 px-3 py-1 rounded-full">
-                  BLOG POST
-                </span>
-                <time className="text-sm text-gray-500">
-                  {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </time>
-              </div>
-
-              {/* Title */}
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                {post.title}
-              </h1>
-
-              {/* Excerpt */}
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed font-light">
-                {post.excerpt}
-              </p>
-
-              {/* Divider */}
-              <div className="w-24 h-1 bg-blue-800 rounded-full mb-8" />
-
-              {/* Body Content */}
-              <div className="prose prose-lg max-w-none">
-                <PortableText value={post.body} components={components} />
-              </div>
-            </div>
-          </div>
-
-          {/* Back to Blog */}
-          <div className="mt-12 text-center">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 text-blue-800 hover:text-blue-900 font-semibold transition-colors duration-200"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              Back to Blog
-            </Link>
-          </div>
-        </div>
-      </article>
-    </main>
-  );
+  return <BlogPostClient post={post} />;
 }

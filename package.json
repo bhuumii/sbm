@@ -5,15 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "analyze": "ANALYZE=true next build",
     "start": "next start",
     "l": "biome lint --write .",
     "f": "biome format --write ."
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^15.5.4",
     "@portabletext/react": "^4.0.3",
     "@sanity/image-url": "^1.1.0",
     "@sanity/orderable-document-list": "^1.4.0",
-    "@sanity/vision": "^4.10.0",
+    "@sanity/vision": "^4.10.1",
     "@tailwindcss/line-clamp": "^0.4.4",
     "dotenv": "^17.2.1",
     "embla-carousel-react": "^8.6.0",
@@ -21,11 +23,13 @@
     "lucide-react": "^0.533.0",
     "next": "15.4.4",
     "next-sanity": "^10.0.6",
+    "next-themes": "^0.4.6",
     "nodemailer": "^7.0.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-intersection-observer": "^9.16.0",
-    "sanity": "^4.10.0",
+    "sanity": "^4.10.1",
+    "sharp": "^0.34.4",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {

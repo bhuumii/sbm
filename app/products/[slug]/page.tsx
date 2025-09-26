@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { ScrollAnimationWrapper } from "@/components/ScrollAnimationWrapper";
+import { useTheme } from "next-themes";
 
 const builder = imageUrlBuilder(client);
 
@@ -24,9 +25,17 @@ interface Product {
 export default function ProductPage() {
   const params = useParams();
   const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === "dark";
 
   useEffect(() => {
     if (!slug) return;
@@ -52,28 +61,44 @@ export default function ProductPage() {
   }, [slug]);
 
   if (isLoading) {
-    return <div className="text-center p-24">Loading product...</div>;
+    return (
+      <div className={`text-center p-24 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}>
+        Loading product...
+      </div>
+    );
   }
 
   if (!product) {
-    return <div className="text-center p-24">Product not found.</div>;
+    return (
+      <div className={`text-center p-24 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}>
+        Product not found.
+      </div>
+    );
   }
 
-  // Guard: if no content (sub-products), don’t render a page
+  // Guard: if no content (sub-products), don't render a page
   if (!product.pageBuilder || product.pageBuilder.length === 0) {
     return (
-      <div className="text-center p-24">
+      <div className={`text-center p-24 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}>
         This product does not have a dedicated page.
       </div>
     );
   }
 
   return (
-    <div className="bg-white">
+    <div className={isDark ? "bg-gray-900" : "bg-white"}>
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
         <ScrollAnimationWrapper>
           <div className="text-center mb-12 md:mb-16">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-blue-800">
+            <h1 className={`text-3xl md:text-4xl font-extrabold ${
+              isDark ? "text-blue-400" : "text-blue-800"
+            }`}>
               {product.name}
             </h1>
           </div>
@@ -110,10 +135,14 @@ export default function ProductPage() {
                       : "md:order-1"
                   }`}
                 >
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  <h3 className={`text-2xl font-bold mb-4 ${
+                    isDark ? "text-white" : "text-gray-800"
+                  }`}>
                     {block.heading}
                   </h3>
-                  <ul className="space-y-2 list-disc list-inside text-gray-600">
+                  <ul className={`space-y-2 list-disc list-inside ${
+                    isDark ? "text-gray-300" : "text-gray-600"
+                  }`}>
                     {block.listItems?.map((item, i) => (
                       <li key={i}>{item}</li>
                     ))}

@@ -4,6 +4,7 @@ import { client } from "@/sanity/client";
 import { ContactForm } from "@/components/ContactForm";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 interface ContactInfo {
   email?: string[];
@@ -13,8 +14,11 @@ interface ContactInfo {
 
 export default function ContactPage() {
   const [info, setInfo] = useState<ContactInfo | null>(null);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const getContactInfo = async () => {
       const query = `*[_type == "contactInfo"][0]`;
       const data = await client.fetch(query);
@@ -23,24 +27,36 @@ export default function ContactPage() {
     getContactInfo();
   }, []);
 
+  const isDark = mounted && resolvedTheme === "dark";
+
   return (
-    <div className="bg-gray-50">
+    <div className={isDark ? "bg-gray-900" : "bg-gray-50"}>
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${
+            isDark ? "text-white" : "text-gray-800"
+          }`}>
             Contact Us
           </h1>
-          <div className="w-24 h-1 bg-blue-800 mx-auto rounded-full mb-4 shadow-lg"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <div className={`w-24 h-1 mx-auto rounded-full mb-4 shadow-lg ${
+            isDark ? "bg-gray-400" : "bg-blue-800"
+          }`}></div>
+          <p className={`text-xl max-w-2xl mx-auto leading-relaxed ${
+            isDark ? "text-gray-300" : "text-gray-600"
+          }`}>
             We're here to help. Reach out to us anytime.
           </p>
         </div>
 
-        <div className="bg-white p-8 md:p-12 rounded-lg shadow-lg max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-         
+        <div className={`p-8 md:p-12 rounded-lg shadow-lg max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 ${
+          isDark ? "bg-gray-800" : "bg-white"
+        }`}>
+          {/* Contact Info Section */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              <h2 className={`text-2xl font-bold mb-6 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}>
                 Get in Touch
               </h2>
               <div className="space-y-4">
@@ -48,7 +64,11 @@ export default function ContactPage() {
                   <a
                     key={emailAddress}
                     href={`mailto:${emailAddress}`}
-                    className="flex items-center space-x-3 text-gray-600 hover:text-blue-600"
+                    className={`flex items-center space-x-3 transition-colors ${
+                      isDark 
+                        ? "text-gray-300 hover:text-blue-400" 
+                        : "text-gray-600 hover:text-blue-600"
+                    }`}
                   >
                     <Mail className="w-5 h-5" />
                     <span className="break-all">{emailAddress}</span>
@@ -58,14 +78,20 @@ export default function ContactPage() {
                   <a
                     key={phoneNumber}
                     href={`tel:${phoneNumber}`}
-                    className="flex items-center space-x-3 text-gray-600 hover:text-blue-600"
+                    className={`flex items-center space-x-3 transition-colors ${
+                      isDark 
+                        ? "text-gray-300 hover:text-blue-400" 
+                        : "text-gray-600 hover:text-blue-600"
+                    }`}
                   >
                     <Phone className="w-5 h-5" />
                     <span className="break-all">{phoneNumber}</span>
                   </a>
                 ))}
                 {info?.address && (
-                  <div className="flex items-start space-x-3 text-gray-600">
+                  <div className={`flex items-start space-x-3 ${
+                    isDark ? "text-gray-300" : "text-gray-600"
+                  }`}>
                     <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
                     <p className="whitespace-pre-wrap break-words">
                       {info.address}
@@ -87,8 +113,11 @@ export default function ContactPage() {
             </div>
           </div>
 
+          {/* Contact Form Section */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <h2 className={`text-2xl font-bold mb-6 ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}>
               Send Us a Message
             </h2>
             <ContactForm />

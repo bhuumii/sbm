@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import { useTheme } from "next-themes";
 
 interface Stat { 
   _id: string; 
@@ -7,7 +8,7 @@ interface Stat {
   label?: string; 
 }
 
-// Custom hook for counter animation
+
 const useCountUp = (target: number, isVisible: boolean, delay: number = 0) => {
   const [count, setCount] = useState(0);
 
@@ -43,6 +44,12 @@ const useCountUp = (target: number, isVisible: boolean, delay: number = 0) => {
 export const StatsSection = ({ stats }: { stats: Stat[] }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,25 +70,35 @@ export const StatsSection = ({ stats }: { stats: Stat[] }) => {
 
   if (!stats || stats.length === 0) return null;
 
- 
   const extractNumber = (numberStr: string): number => {
     const num = parseInt(numberStr.replace(/[^0-9]/g, ''));
     return isNaN(num) ? 0 : num;
   };
 
-  
   const formatNumber = (originalStr: string, currentNum: number): string => {
     const suffix = originalStr.replace(/[0-9]/g, '');
     return currentNum + suffix;
   };
 
+  const isDark = mounted && resolvedTheme === "dark";
+
   return (
     <section 
       ref={sectionRef}
-      className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-20 relative overflow-hidden"
+      className={`${
+        isDark 
+          ? "bg-gradient-to-br from-gray-300 via-gray-200 to-gray-300" 
+          : "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+      } ${
+        isDark ? "text-gray-800" : "text-white"
+      } py-16 md:py-20 relative overflow-hidden`}
     >
-  
-      <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%)] bg-[length:20px_20px]"></div>
+   
+      <div className={`absolute inset-0 ${
+        isDark 
+          ? "bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.02)_50%,transparent_75%)]" 
+          : "bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%)]"
+      } bg-[length:20px_20px]`}></div>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
@@ -103,22 +120,39 @@ export const StatsSection = ({ stats }: { stats: Stat[] }) => {
                 }}
               >
                 <div className="relative group">
-          
+                  {/* Top blue line */}
                   <div className="w-12 h-1 bg-gradient-to-r from-blue-800 to-cyan-400 mx-auto mb-4 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
                   
-                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+                  {/* Numbers */}
+                  <h3 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300 ${
+                    isDark 
+                      ? "text-blue-900" 
+                      : "bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent"
+                  }`}>
                     {displayNumber}
                   </h3>
                   
-              
-                  <div className="w-8 h-0.5 bg-gray-600 mx-auto mb-3"></div>
+                  {/* Separator line */}
+                  <div className={`w-8 h-0.5 mx-auto mb-3 ${
+                    isDark ? "bg-gray-400" : "bg-gray-600"
+                  }`}></div>
                   
-                  <p className="text-sm md:text-base text-gray-300 uppercase tracking-wider font-medium group-hover:text-white transition-colors duration-300">
+                  {/* Labels */}
+                  <p className={`text-sm md:text-base uppercase tracking-wider font-medium transition-colors duration-300 ${
+                    isDark 
+                      ? "text-gray-600 group-hover:text-gray-800" 
+                      : "text-gray-300 group-hover:text-white"
+                  }`}>
                     {stat.label}
                   </p>
 
-                
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                  {/* Hover background effect */}
+                  <div className={`absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 ${
+                    isDark 
+                      ? "bg-gradient-to-t from-blue-200/50 to-blue-100/20" 
+                      : "bg-gradient-to-t from-blue-500/10 to-transparent"
+                  }`}></div>
+
                 </div>
               </div>
             );
