@@ -124,7 +124,7 @@ export const StatsSection = ({ stats }: { stats: Stat[] }) => {
                   <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-cyan-200 mx-auto mb-4 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
                   
                   {/* Numbers */}
-                  <h3 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300 ${
+                  <h3 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300 ${
                     isDark 
                       ? "bg-gradient-to-b from-white to-gray-200 bg-clip-text text-transparent" 
                       : "bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent"
