@@ -24,16 +24,15 @@ export const AnimatedSBMLogo = () => {
   const isDark = mounted && resolvedTheme === "dark";
 
   return (
-    <div className={`flex flex-col justify-start md:justify-center items-center min-h-[calc(100vh - 1rem)] ${isDark ? "bg-gray-900" : "bg-white"} relative overflow-hidden pt-8 md:pt-0`}>
+    // We add a "dark-mode" class here when needed for our specific CSS rule
+    <div className={`flex flex-col justify-start md:justify-center items-center min-h-[calc(100vh - 3.5rem)] ${isDark ? "bg-gray-900 dark-mode" : "bg-white"} relative overflow-hidden pt-8 md:pt-0`}>
       
-    
       <div className="absolute inset-0 opacity-5">
         <div className={`absolute top-20 right-20 w-64 h-64 ${isDark ? "bg-gray-600" : "bg-blue-400"} rounded-full blur-3xl`}></div>
         <div className={`absolute bottom-20 left-20 w-48 h-48 ${isDark ? "bg-gray-500" : "bg-indigo-300"} rounded-full blur-2xl`}></div>
       </div>
 
       <div className="flex flex-col justify-center items-center text-center relative z-10 w-full px-4 pb-8 md:pb-12">
-        
         
         <div className="relative">
           <Image
@@ -46,7 +45,6 @@ export const AnimatedSBMLogo = () => {
             className={`w-auto h-auto object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-500 ${
               isDark 
                 ?  "max-w-[90vw] md:max-w-[45rem] max-h-[60vh] md:max-h-[65vh]" 
-
                 : "max-w-[90vw] md:max-w-[55rem] max-h-[65vh] md:max-h-[80vh]"
             }`}
             style={{
@@ -56,7 +54,8 @@ export const AnimatedSBMLogo = () => {
         </div>
 
      
-        <div className={`relative ${isDark ? "mt-20 md:mt-24" : "-mt-4 md:-mt-16"}`}>
+        {/* We add a "hero-text-container" class to target this specific div */}
+        <div className={`hero-text-container relative ${isDark ? "mt-20 md:mt-24" : "-mt-4 md:-mt-16"}`}>
           <div className="relative overflow-hidden">
             <h1
               className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold ${isDark ? "text-white" : "text-blue-900"} transition-all duration-1000 transform ${
@@ -110,6 +109,18 @@ export const AnimatedSBMLogo = () => {
         
         .animate-float {
           animation: float 6s ease-in-out infinite;
+        }
+
+        /* 
+          This is the targeted fix.
+          It applies ONLY to screens with a height of 820px or less.
+          The ".dark-mode" selector ensures it ONLY applies in dark mode.
+          This reduces the large margin, pulling the text up into view on shorter screens.
+        */
+        @media (max-height: 820px) {
+          .dark-mode .hero-text-container {
+            margin-top: 1rem; /* Equivalent to mt-4 */
+          }
         }
       `}</style>
     </div>
