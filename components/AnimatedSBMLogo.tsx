@@ -24,7 +24,7 @@ export const AnimatedSBMLogo = () => {
   const isDark = mounted && resolvedTheme === "dark";
 
   return (
-    // We add a "dark-mode" class here when needed for our specific CSS rule
+  
     <div className={`flex flex-col justify-start md:justify-center items-center min-h-[calc(100vh - 3.5rem)] ${isDark ? "bg-gray-900 dark-mode" : "bg-white"} relative overflow-hidden pt-8 md:pt-0`}>
       
       <div className="absolute inset-0 opacity-5">
@@ -54,7 +54,7 @@ export const AnimatedSBMLogo = () => {
         </div>
 
      
-        {/* We add a "hero-text-container" class to target this specific div */}
+        
         <div className={`hero-text-container relative ${isDark ? "mt-20 md:mt-24" : "-mt-4 md:-mt-16"}`}>
           <div className="relative overflow-hidden">
             <h1
