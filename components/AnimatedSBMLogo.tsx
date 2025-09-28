@@ -111,15 +111,9 @@ export const AnimatedSBMLogo = () => {
           animation: float 6s ease-in-out infinite;
         }
 
-        /* 
-          This is the targeted fix.
-          It applies ONLY to screens with a height of 820px or less.
-          The ".dark-mode" selector ensures it ONLY applies in dark mode.
-          This reduces the large margin, pulling the text up into view on shorter screens.
-        */
         @media (max-height: 820px) {
           .dark-mode .hero-text-container {
-            margin-top: 1rem; /* Equivalent to mt-4 */
+            margin-top: 2.5rem; 
           }
         }
       `}</style>
