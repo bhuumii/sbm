@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={`${inter.className} bg-white dark:bg-gray-900 transition-colors duration-300`}>
         <ThemeProvider 
           attribute="class" 
-           defaultTheme="system"  
+           defaultTheme="light"  
   enableSystem={true}   
           disableTransitionOnChange
         >

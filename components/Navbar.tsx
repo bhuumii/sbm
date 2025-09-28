@@ -74,13 +74,16 @@ export const Navbar = () => {
           : "shadow-md"
       } sticky top-0 z-30`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
-          <Image
-            src={isDark ? "/assets/dark.png" : "/assets/light.png"}
-            alt="Company Logo"
-            width={150}
-            height={40}
-            priority
-          />
+          <Link href="/" className="flex-shrink-0">
+            <Image
+              src={isDark ? "/assets/dark.png" : "/assets/light.png"}
+              alt="Company Logo"
+              width={150}
+              height={40}
+              priority
+              className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
+            />
+          </Link>
           
           <div className="hidden md:flex space-x-8 items-center">
             <Link
@@ -197,13 +200,16 @@ export const Navbar = () => {
             <div className={`flex justify-between items-center p-4 border-b sticky top-0 backdrop-blur-lg rounded-t-2xl ${
               isDark ? "bg-gray-900/80 border-gray-700" : "bg-white/80 border-gray-200"
             }`}>
-              <Image
-                src={isDark ? "/assets/dark.png" : "/assets/light.png"}
-                alt="Company Logo"
-                width={120}
-                height={32}
-                priority
-              />
+              <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                <Image
+                  src={isDark ? "/assets/dark.png" : "/assets/light.png"}
+                  alt="Company Logo"
+                  width={120}
+                  height={32}
+                  priority
+                  className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                />
+              </Link>
               <button
                 onClick={() => setIsMenuOpen(false)}
                 aria-label="Close navigation menu"
