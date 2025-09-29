@@ -84,7 +84,7 @@ export const FooterClient = ({ footer, contact }: { footer: FooterData; contact:
       <div className="container mx-auto px-4 sm:px-6 py-8 md:py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1: Logo & Tagline */}
-          <div className="space-y-6 md:col-span-1 flex flex-col justify-center md:items-start">
+          <div className="space-y-6 md:col-span-1 flex flex-col justify-center items-center md:items-start text-center md:text-left">
             <Image 
               src={isDark ? "/assets/light.png" : "/assets/dark.png"}    
               alt="SBM Traders Footer Logo"
@@ -125,7 +125,8 @@ export const FooterClient = ({ footer, contact }: { footer: FooterData; contact:
 
 
           {/* Column 3: Contact Info */}
-          <div>
+          {/* The change is in the line below */}
+          <div className="text-center md:text-left">
             <h3 className={`text-lg font-semibold mb-4 ${
               isDark ? "text-gray-900" : "text-white"
             }`}>Contact</h3>
@@ -184,7 +185,8 @@ export const FooterClient = ({ footer, contact }: { footer: FooterData; contact:
           </div>
           
           {/* Column 4: Social & QR */}
-          <div className="space-y-6">
+          {/* The change is in the line below */}
+          <div className="space-y-6 flex flex-col items-center md:items-start">
             <h3 className={`text-lg font-semibold ${
               isDark ? "text-gray-900" : "text-white"
             }`}>Connect</h3>
