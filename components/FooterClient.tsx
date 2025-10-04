@@ -185,7 +185,7 @@ export const FooterClient = ({ footer, contact }: { footer: FooterData; contact:
           </div>
           
           {/* Column 4: Social & QR */}
-          {/* The change is in the line below */}
+          
           <div className="space-y-6 flex flex-col items-center md:items-start">
             <h3 className={`text-lg font-semibold ${
               isDark ? "text-gray-900" : "text-white"
