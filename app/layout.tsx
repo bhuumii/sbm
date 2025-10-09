@@ -48,9 +48,9 @@ export const metadata: Metadata = {
 
   // Update favicon to use your main logo
   icons: {
-    icon: "cropped.png",
-    shortcut: "cropped.png",
-    apple: "cropped.png",
+    icon: "/cropped.png",
+    shortcut: "/cropped.png",
+    apple: "/cropped.png",
   },
   
   keywords: ["signage materials", "branding materials", "SBM traders", "LED modules", "acrylic sheets", "vinyl"],
@@ -68,11 +68,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        
-        <meta property="og:image" content="https://www.sbmtraders.in/logo2.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:image" content="https://www.sbmtraders.in/logo2.png" />
+       
       </head>
       <body className={`${inter.className} bg-white dark:bg-gray-900 transition-colors duration-300`}>
         <ThemeProvider 
