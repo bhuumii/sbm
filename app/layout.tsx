@@ -48,9 +48,9 @@ export const metadata: Metadata = {
 
   // Update favicon to use your main logo
   icons: {
-    icon: "/assets/darkmain.png",
-    shortcut: "/assets/darkmain.png",
-    apple: "/assets/darkmain.png",
+    icon: "cropped.png",
+    shortcut: "cropped.png",
+    apple: "cropped.png",
   },
   
   keywords: ["signage materials", "branding materials", "SBM traders", "LED modules", "acrylic sheets", "vinyl"],
